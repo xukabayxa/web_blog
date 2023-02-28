@@ -14,7 +14,7 @@
         </div>
         <div class="container">
             <div class="row">
-                <div class="content ">
+                <div class="content" id="list-post">
                     <div class="load-more-post">
                         @foreach($posts as $index => $post)
                             <article>
@@ -72,7 +72,7 @@
 @push('scripts')
     <script>
         app.controller('Posts', function ($rootScope, $scope, $compile, $interval) {
-            $scope.checkLoad = {{$posts->count() > 3 ? true : false}};
+            $scope.checkLoad = true;
             $scope.loading = false;
             $scope.post_ids = {{$posts->pluck('id')}};
 
@@ -94,8 +94,7 @@
                             $(".load-more-post").append($compile(response.post_render)($scope));
                             $scope.post_ids = $scope.post_ids.concat(response.post_ids);
 
-                            $('html, body').animate({ scrollTop: $(".load-more-post").height()-$(window).height() }, 500);
-
+                            $('html, body').animate({ scrollTop:  $(document).height()-$(window).height()}, 500);
 
                             if(response.post_ids.length < 1) {
                                 $scope.checkLoad = false;
