@@ -1,17 +1,17 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : MySQL
+ Source Server         : Local
  Source Server Type    : MySQL
  Source Server Version : 50733
  Source Host           : localhost:3306
- Source Schema         : app3012
+ Source Schema         : nang_luong
 
  Target Server Type    : MySQL
  Target Server Version : 50733
  File Encoding         : 65001
 
- Date: 06/05/2022 08:54:54
+ Date: 28/02/2023 17:00:31
 */
 
 SET NAMES utf8mb4;
@@ -265,13 +265,16 @@ CREATE TABLE `banners`  (
   `created_at` timestamp(0) NULL DEFAULT NULL,
   `updated_at` timestamp(0) NULL DEFAULT NULL,
   `intro` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL,
+  `page` tinyint(4) NOT NULL,
+  `status` tinyint(4) NOT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 11 CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 18 CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of banners
 -- ----------------------------
-INSERT INTO `banners` VALUES (10, 'zxxzxzxzxz', 'https://www.google.com', 'right', 1, 1, '2022-01-20 18:02:24', '2022-03-23 14:37:44', '<h5>Thegioidongho.com</h5>\r\n\r\n<h1><span style=\"font-size:20px\">Đồng hồ, phụ kiện gi&aacute; rẻ</span></h1>');
+INSERT INTO `banners` VALUES (16, 'nnnnn', NULL, NULL, 1, 1, '2023-02-27 16:47:23', '2023-02-28 16:21:09', '<div>nnnnnnnnnnnnnnnnnnnnnnnnnn</div>', 1, 1);
+INSERT INTO `banners` VALUES (17, 'n', NULL, NULL, 1, 1, '2023-02-27 17:24:54', '2023-02-28 16:17:00', '<div>nnnnnnnn</div>', 2, 1);
 
 -- ----------------------------
 -- Table structure for bill_export_products
@@ -521,6 +524,23 @@ INSERT INTO `bills` VALUES (50, 'HĐ-00050', '2021-06-23 08:21:00', 21, '30S6789
 INSERT INTO `bills` VALUES (51, 'HĐ-00051', '2021-06-28 08:28:00', 21, '30S6789', 17, 27, 'Dương Trọng Hoàng', 140000.00, 0.00, 140000.00, 0.00, 140000.00, 0.00, 0.00, 140000.00, 1, NULL, '2021-06-28 08:28:41', 4, 2, 2, '2021-06-28 17:28:41', '2021-06-28 17:28:41', 0.00, NULL, 0.00, 0.00, NULL, 0.00, 140000.00);
 
 -- ----------------------------
+-- Table structure for block2
+-- ----------------------------
+DROP TABLE IF EXISTS `block2`;
+CREATE TABLE `block2`  (
+  `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `title` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL,
+  `body` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL,
+  `page` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `created_by` int(11) NOT NULL,
+  `updated_by` int(11) NOT NULL,
+  `created_at` timestamp(0) NULL DEFAULT NULL,
+  `updated_at` timestamp(0) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
 -- Table structure for blocks
 -- ----------------------------
 DROP TABLE IF EXISTS `blocks`;
@@ -532,33 +552,21 @@ CREATE TABLE `blocks`  (
   `updated_by` bigint(20) UNSIGNED NULL DEFAULT NULL,
   `created_at` timestamp(0) NULL DEFAULT NULL,
   `updated_at` timestamp(0) NULL DEFAULT NULL,
+  `title` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL,
+  `title_en` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL,
+  `body_en` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL,
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `blocks_name_unique`(`name`) USING BTREE,
   INDEX `blocks_created_by_foreign`(`created_by`) USING BTREE,
   INDEX `blocks_updated_by_foreign`(`updated_by`) USING BTREE,
   CONSTRAINT `blocks_created_by_foreign` FOREIGN KEY (`created_by`) REFERENCES `users` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `blocks_updated_by_foreign` FOREIGN KEY (`updated_by`) REFERENCES `users` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 17 CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of blocks
 -- ----------------------------
-INSERT INTO `blocks` VALUES (1, 'Khối nội dung số 2', '<div><img alt=\"\" src=\"/uploads/post_files/images/block_html/slide1.png\" style=\"height:auto; width:100\" /></div>', 1, 1, '2021-08-02 20:32:56', '2021-08-09 11:17:11');
-INSERT INTO `blocks` VALUES (2, 'Text dưới label sản phẩm cùng loại', '<div>With a water softener from Culligan Water, your whole home benefits. Water-using appliances last longer, dishes get cleaner and your clothes, hair and skin feel softer. Best of all, Culligan Water systems are backed by industry-leading warranties and are built to last with a tank that resists UV rays, rust and corrosion. That’s water you can feel confident about.</div>', 1, 1, '2021-08-07 14:21:15', '2021-08-07 14:21:15');
-INSERT INTO `blocks` VALUES (3, 'Banner trang hỗ trợ', '<div><img alt=\"\" src=\"/uploads/post_files/images/block_html/CM_Kit_WtrFauc-4267_1.jpg\" style=\"height:421px; width:1400px\" /></div>', 1, 1, '2021-08-09 17:09:07', '2021-08-09 17:09:07');
-INSERT INTO `blocks` VALUES (4, 'Text giới thiệu trên trang hỗ trợ', '<p>Your local Culligan Water Expert has the knowledge and know-how to service and repair any water treatment system available today – even if it’s not a Culligan water softener or filtration system – and ensure you’re getting the best possible water. Ask about our Culligan Service Agreements for the most convenient and reliable service, repair, or maintenance for your water treatment system.</p>', 1, 1, '2021-08-09 17:11:22', '2021-08-09 17:11:22');
-INSERT INTO `blocks` VALUES (5, 'Text cuối trang (footer)', '<p><strong>Culligan 100% Satisfaction Guarantee</strong></p>\n\n<p>If you are dissatisfied with your Culligan product for any reason within 30 days of<br />\nyour purchase, Culligan will remove the product and refund the purchase price.*</p>', 1, 1, '2021-08-19 11:26:16', '2021-08-19 11:27:21');
-INSERT INTO `blocks` VALUES (6, 'Text mô tả dưới phần nổi bật trang chủ', '<p>Culligan Water offers a range of products and</p>\r\n\r\n<p>solutions for every kind of water need.</p>', 1, 1, '2021-08-28 15:58:02', '2021-08-28 15:58:02');
-INSERT INTO `blocks` VALUES (7, 'Block giải pháp trên trang chủ', '<p>Culligan Water</p>\r\n\r\n<h3>Business Solutions</h3>\r\n\r\n<p>Convenient water cooler and delivery solutions customized for how your business hydrates. It’s easy to bring fresher, better-tasting water to your office, break room, or franchise locations with simple, efficient drinking water solutions from Culligan. Large or small, we’re your water resource.<br />\r\n<br />\r\n<a class=\"view-more\" href=\"https://www.culligan.com/office\" title=\"View solutions\">View solutions</a></p>', 1, 1, '2021-08-28 16:06:07', '2021-08-28 16:06:07');
-INSERT INTO `blocks` VALUES (8, 'Nội dung mô tả dưới Title tại sao mua tại lợi toán', '<p>Culligan Water offers a range of products and</p>\r\n\r\n<p>solutions for every kind of water need.</p>', 1, 1, '2021-08-28 16:15:17', '2021-08-28 16:15:17');
-INSERT INTO `blocks` VALUES (9, 'Block trên phần ý kiến khách hàng', '<h2 class=\"banner-title\"><strong>Celebrating 85 Years</strong><br />\r\nOf Service, Innovation and Expertise</h2>\r\n\r\n<div class=\"text-holder\">\r\n<p class=\"banner-description\">We’re proud to celebrate nearly a century as your trusted source for providing better water for a better world.</p>\r\n\r\n<p><a class=\"view-more\" href=\"#\">Chi tiết</a></p>\r\n</div>', 1, 1, '2021-08-28 16:30:40', '2021-08-28 16:30:40');
-INSERT INTO `blocks` VALUES (10, 'Menu trên Banner', '<ul>\r\n	<li><a href=\"\">Residential</a></li>\r\n	<li><a href=\"\">Residential</a></li>\r\n	<li><a href=\"\">Residential</a></li>\r\n	<li><a href=\"\">Residential</a></li>\r\n</ul>', 1, 1, '2021-09-25 21:16:10', '2021-09-25 21:16:10');
-INSERT INTO `blocks` VALUES (11, 'Tiêu đề trang hỗ trợ khách hàng', 'Schedule Water Treatment System Service & Maintenance', 1, 1, '2021-10-04 10:17:43', '2021-10-04 10:17:43');
-INSERT INTO `blocks` VALUES (12, 'banner 1 trang chủ', '<div><img alt=\"\" src=\"/uploads/post_files/images/banner-01.png\" style=\"height:250px; width:570px\" /></div>', 1, 1, '2022-03-23 11:41:45', '2022-03-23 14:41:10');
-INSERT INTO `blocks` VALUES (13, 'banner 2 trang chủ', '<div><img alt=\"\" src=\"/uploads/post_files/images/banner-02.png\" style=\"height:250px; width:570px\" /></div>', 1, 1, '2022-03-23 14:41:32', '2022-03-23 14:41:32');
-INSERT INTO `blocks` VALUES (14, 'banner 3 trang chủ', '<div><img alt=\"\" src=\"/uploads/post_files/images/banner-03.png\" style=\"height:250px; width:570px\" /></div>', 1, 1, '2022-03-23 14:41:50', '2022-03-23 14:41:50');
-INSERT INTO `blocks` VALUES (15, 'banner 4 trang chủ', '<div><img alt=\"\" src=\"/uploads/post_files/images/banner-04.png\" style=\"height:250px; width:570px\" /></div>', 1, 1, '2022-03-23 14:42:10', '2022-03-23 14:42:10');
-INSERT INTO `blocks` VALUES (16, 'Block trang about', '<div><img alt=\"\" src=\"/uploads/post_files/images/banner-02.png\" style=\"height:250px; width:570px\" /></div>', 1, 1, '2022-03-23 15:56:46', '2022-03-23 15:56:46');
+INSERT INTO `blocks` VALUES (1, 'Khối giới thiệu công ty - trang home', '<div>\r\n<p>Over 30 year&#39;s experience providing top quality carpentry across world.</p>\r\n\r\n<p>Renewable energy and new energy are the future-oriented and indisputable trend of the energy industry in general. RT Energy ties its future to the promotion and development of renewable energy – towards a green, clean, and sustainable world for future generations.</p>\r\n\r\n<p>Renewable energy and new energy are the future-oriented and indisputable trend of the energy industry in general. RT Energy ties its future to the promotion and development of renewable energy – towards a green, clean, and sustainable world for future generations.</p>\r\n</div>', 1, 1, '2022-10-20 16:57:52', '2022-10-20 17:16:17', 'SUSTAINABLE DEVELOPMENT AND A NET ZERO EMISSIONS FUTURE VIEEEE', 'SUSTAINABLE DEVELOPMENT AND A NET ZERO EMISSIONS FUTURE ENGGG', NULL);
 
 -- ----------------------------
 -- Table structure for bookings
@@ -586,6 +594,50 @@ CREATE TABLE `bookings`  (
   CONSTRAINT `bookings_g7_id_foreign` FOREIGN KEY (`g7_id`) REFERENCES `g7_infos` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `bookings_updated_by_foreign` FOREIGN KEY (`updated_by`) REFERENCES `users` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for business_sectors
+-- ----------------------------
+DROP TABLE IF EXISTS `business_sectors`;
+CREATE TABLE `business_sectors`  (
+  `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `created_by` int(11) NOT NULL,
+  `updated_by` int(11) NOT NULL,
+  `created_at` timestamp(0) NULL DEFAULT NULL,
+  `updated_at` timestamp(0) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of business_sectors
+-- ----------------------------
+INSERT INTO `business_sectors` VALUES (1, 1, 1, '2022-10-22 11:23:44', '2022-10-22 11:23:44');
+INSERT INTO `business_sectors` VALUES (2, 1, 1, '2022-10-22 11:24:11', '2022-10-22 11:24:11');
+INSERT INTO `business_sectors` VALUES (3, 1, 1, '2022-10-22 11:24:26', '2022-10-22 11:24:26');
+
+-- ----------------------------
+-- Table structure for business_sectors_languages
+-- ----------------------------
+DROP TABLE IF EXISTS `business_sectors_languages`;
+CREATE TABLE `business_sectors_languages`  (
+  `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `business_sector_id` int(11) NOT NULL,
+  `title` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `description` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL,
+  `language` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `created_at` timestamp(0) NULL DEFAULT NULL,
+  `updated_at` timestamp(0) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of business_sectors_languages
+-- ----------------------------
+INSERT INTO `business_sectors_languages` VALUES (1, 5, 'lĩnh vực 1', 'cccccccccccccccccccc', 'vi', '2022-10-20 20:58:30', '2022-10-20 21:33:59');
+INSERT INTO `business_sectors_languages` VALUES (2, 5, 'yuyu', NULL, 'en', '2022-10-20 21:33:59', '2022-10-20 21:33:59');
+INSERT INTO `business_sectors_languages` VALUES (3, 1, 'Lĩnh vực 1', NULL, 'vi', '2022-10-22 11:23:44', '2022-10-22 11:23:52');
+INSERT INTO `business_sectors_languages` VALUES (4, 2, 'Lĩnh vực 2', NULL, 'vi', '2022-10-22 11:24:11', '2022-10-22 11:24:11');
+INSERT INTO `business_sectors_languages` VALUES (5, 3, 'Lĩnh vực 3', NULL, 'vi', '2022-10-22 11:24:26', '2022-10-22 11:24:26');
 
 -- ----------------------------
 -- Table structure for calendar_reminders
@@ -784,6 +836,13 @@ CREATE TABLE `configs`  (
   `address` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL,
   `address_company` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL,
   `address_center_insurance` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL,
+  `video` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL,
+  `slogan_vi` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL,
+  `slogan_en` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL,
+  `des_homepage` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL,
+  `des_aboutpage` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL,
+  `des_blogpage` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL,
+  `des_contactpage` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `configs_created_by_foreign`(`created_by`) USING BTREE,
   INDEX `configs_updated_by_foreign`(`updated_by`) USING BTREE
@@ -792,7 +851,7 @@ CREATE TABLE `configs`  (
 -- ----------------------------
 -- Records of configs
 -- ----------------------------
-INSERT INTO `configs` VALUES (1, 10, '2021-06-26 01:08:30', '2022-04-16 11:47:12', 1, 1, 'Máy lọc nước Bắc Ninh - Siêu thị Lợi Toán', '0858983388', '0962241836', 'namdang@dnsmedia.vn', 'https://facebook.com/locnuocbacninh', 'Trải qua hơn 10 năm hình thành và phát triển từ kinh doanh cá thể, và được sự tin cậy của người tiêu dùng BEPTOT.VN đã chính thức đi vào hoạt động.', 'https://goo.gl/maps/2tjMf6LyT68ViUFw6', 1, 1, 1, '0808988888', 'ssasa', 'asasa', 'asa', '<h1>Đ&Ocirc;I N&Eacute;T VỀ <strong>BEPTOT.VN</strong></h1>\r\n\r\n<p>Trải qua hơn 10 năm h&igrave;nh th&agrave;nh v&agrave; ph&aacute;t triển từ kinh doanh c&aacute; thể, v&agrave; được sự tin cậy của người ti&ecirc;u d&ugrave;ng BEPTOT.VN đ&atilde; ch&iacute;nh thức đi v&agrave;o hoạt động.</p>\r\n\r\n<p>Lĩnh vực hoạt động kinh doanh về :</p>\r\n\r\n<ul>\r\n	<li>Dịch vụ về Thiết bị nh&agrave; bếp</li>\r\n	<li>Kinh doanh thiết bị nh&agrave; bếp (Bếp từ - Bếp gas - M&aacute;y rửa b&aacute;t - L&ograve; nướng - M&aacute;y h&uacute;t m&ugrave;i - Đồ gia dụng...)</li>\r\n	<li>Sửa chữa v&agrave; bảo dưỡng thiết bị nh&agrave; bếp</li>\r\n	<li>Lắp đặt trang thiết bị bếp nh&agrave; h&agrave;ng kh&aacute;ch sạn, hệ thống Gas c&ocirc;ng nghiệp...</li>\r\n	<li><img alt=\"Không có mô tả ảnh.\" src=\"https://scontent.fhan2-3.fna.fbcdn.net/v/t1.6435-9/199039288_1665823173605764_6010671126037052980_n.jpg?_nc_cat=107&amp;ccb=1-5&amp;_nc_sid=973b4a&amp;_nc_ohc=JbO64j_UcY0AX958mCS&amp;_nc_oc=AQli3825nkxuBaXdxgUWu_8G_Hfx62uFFSel6i3sQtnZizg2GbJ-GVcZM9V3zuB-SC4&amp;_nc_ht=scontent.fhan2-3.fna&amp;oh=00_AT99bReXQvvwtKKJ0isFoPN2eMPhPTLS8TsoJRJAd29iFg&amp;oe=61DED1DB\" /></li>\r\n</ul>\r\n\r\n<h1>QUAN ĐIỂM <strong>KINH DOANH</strong></h1>\r\n\r\n<p>Kh&aacute;ch h&agrave;ng l&agrave; gi&aacute; trị cơ bản của bất k&igrave; doanh nghiệp n&agrave;o đ&oacute; cũng l&agrave; l&yacute; do để doanh nghiệp tồn tại v&agrave; ph&aacute;t triển. Đối với ch&uacute;ng t&ocirc;i kh&aacute;ch h&agrave;ng kh&ocirc;ng chỉ l&agrave; Thượng Đế m&agrave; c&ograve;n l&agrave; những người bạn th&acirc;n thiết, đồng h&agrave;nh c&ugrave;ng với ch&uacute;ng t&ocirc;i trong qu&aacute; tr&igrave;nh ph&aacute;t triển.</p>\r\n\r\n<p>Sử dụng thiết bị nh&agrave; bếp an to&agrave;n, chất lượng l&agrave; sự quan t&acirc;m h&agrave;ng đầu của bất cứ người nội trợ n&agrave;o. BEPTOT.VN lắng nghe, v&agrave; thấu hiểu những nhu cầu đ&oacute;.</p>\r\n\r\n<p>Ch&uacute;ng t&ocirc;i t&ocirc;n trọng kh&aacute;ch h&agrave;ng v&agrave; lu&ocirc;n nỗ lực ph&aacute;t triển để đ&aacute;p ứng tốt nhất y&ecirc;u cầu về chất lượng v&agrave; sự tin tưởng của kh&aacute;ch h&agrave;ng d&agrave;nh cho BEPTOT.VN trong suốt thời gian qua.</p>\r\n\r\n<p>Đặt phương ch&acirc;m “Chất lượng đảm bảo, gi&aacute; th&agrave;nh hợp l&yacute;” v&agrave; uy t&iacute;n l&ecirc;n h&agrave;ng đầu.</p>\r\n\r\n<p>Nhiều năm qua BEPTOT.VN vinh dự được người ti&ecirc;u d&ugrave;ng b&igrave;nh chọn l&agrave; một trong những địa chỉ cung cấp thiết bị nh&agrave; bếp ch&iacute;nh h&atilde;ng, uy t&iacute;n với kh&aacute;ch h&agrave;ng sử dụng cũng như l&agrave; đại l&yacute; tin cậy của c&aacute;c h&atilde;ng sản xuất lớn tr&ecirc;n thế giới.</p>\r\n\r\n<h2>ĐỊNH HƯỚNG <strong>PH&Aacute;T TRIỂN</strong></h2>\r\n\r\n<p><img alt=\"\" src=\"https://beptot.vn/img/about/testi1.jpg\" /></p>\r\n\r\n<p>Lu&ocirc;n lu&ocirc;n giữ vững uy t&iacute;n sự tin cậy của kh&aacute;ch h&agrave;ng d&agrave;nh cho BEPTOT.VN v&agrave; ng&agrave;y c&agrave;ng ph&aacute;t triển ho&agrave;n thiện m&igrave;nh hơn nữa để phục vụ tốt nhất cho kh&aacute;ch h&agrave;ng.</p>\r\n\r\n<p>Một số h&igrave;nh ảnh Showroom c&ocirc;ng ty</p>\r\n\r\n<p><img alt=\"Có thể là hình ảnh về đường và văn bản cho biết \'THẾ GIỚI BẾP CHÂU ÂU FAGOR Nagakawa BOSCH Invented for THIẾT HIẾ BỊ NHÀ BẾP CAO CẤP FASTER FEectolm Binova BEPTOT.VN Bếp của HỌi nhà HO\'\" src=\"https://scontent.fhan2-1.fna.fbcdn.net/v/t39.30808-6/255340839_1777908822397198_1409386457660401257_n.jpg?_nc_cat=101&amp;ccb=1-5&amp;_nc_sid=973b4a&amp;_nc_ohc=TWi0hgXFJcIAX_5dCpo&amp;_nc_ht=scontent.fhan2-1.fna&amp;oh=00_AT8rvuuSWj4QuSJ6POhraRcVD5wHxw1AEmiqdaPw3qyV2Q&amp;oe=61BCBA7E\" /></p>\r\n\r\n<p><img alt=\"Có thể là hình ảnh về đường\" src=\"https://scontent.fhan2-2.fna.fbcdn.net/v/t39.30808-6/240594207_1748245915363489_8029364939393123011_n.jpg?_nc_cat=102&amp;ccb=1-5&amp;_nc_sid=973b4a&amp;_nc_ohc=NE5QHpX6VxAAX9_SMKS&amp;_nc_ht=scontent.fhan2-2.fna&amp;oh=00_AT_hDEaB9bHLyLQQr61XkUxjy1fbiHENrohipDtUDZPjuQ&amp;oe=61BCEC97\" /></p>\r\n\r\n<p><img alt=\"Không có mô tả ảnh.\" src=\"https://scontent.fhan2-1.fna.fbcdn.net/v/t39.30808-6/240917463_1720455944809153_5582161594963379688_n.jpg?_nc_cat=101&amp;ccb=1-5&amp;_nc_sid=973b4a&amp;_nc_ohc=hoV_mFngc_4AX-C4rHg&amp;_nc_ht=scontent.fhan2-1.fna&amp;oh=00_AT86ndJjZRGvltz9HmlK5aJF0rIVZ3hTcF8tSwylP2a-9A&amp;oe=61BD3F0A\" /></p>\r\n\r\n<p><img alt=\"Có thể là hình ảnh về ngoài trời\" src=\"https://scontent.fhan2-2.fna.fbcdn.net/v/t39.30808-6/238029393_1708428422678572_6210771855426620878_n.jpg?_nc_cat=111&amp;ccb=1-5&amp;_nc_sid=973b4a&amp;_nc_ohc=SnsHlCZBWroAX_eaSIq&amp;_nc_ht=scontent.fhan2-2.fna&amp;oh=00_AT9PC_k5x3GMUgm6ct9YvFEE0VUhghkezSSpExOpbrtsSA&amp;oe=61BC8DC0\" /></p>', NULL, 'hihiiiiiiiiiiiiii', '156 Lạc Trung, Q. Hai Bà Trưng, HN');
+INSERT INTO `configs` VALUES (1, 10, '2021-06-26 01:08:30', '2023-02-28 14:56:26', 1, 1, 'Máy lọc nước Bắc Ninh - Siêu thị Lợi Toán', '0858983388', '0962241836', 'namdang@dnsmedia.vn', 'https://facebook.com/locnuocbacninh', 'Trải qua hơn 10 năm hình thành và phát triển từ kinh doanh cá thể, và được sự tin cậy của người tiêu dùng BEPTOT.VN đã chính thức đi vào hoạt động.', 'https://goo.gl/maps/2tjMf6LyT68ViUFw6', 1, 1, 1, '0808988888', 'ssasa', 'asasa', 'asa', '<h1>Đ&Ocirc;I N&Eacute;T VỀ <strong>BEPTOT.VN</strong></h1>\r\n\r\n<p>Trải qua hơn 10 năm h&igrave;nh th&agrave;nh v&agrave; ph&aacute;t triển từ kinh doanh c&aacute; thể, v&agrave; được sự tin cậy của người ti&ecirc;u d&ugrave;ng BEPTOT.VN đ&atilde; ch&iacute;nh thức đi v&agrave;o hoạt động.</p>\r\n\r\n<p>Lĩnh vực hoạt động kinh doanh về :</p>\r\n\r\n<ul>\r\n	<li>Dịch vụ về Thiết bị nh&agrave; bếp</li>\r\n	<li>Kinh doanh thiết bị nh&agrave; bếp (Bếp từ - Bếp gas - M&aacute;y rửa b&aacute;t - L&ograve; nướng - M&aacute;y h&uacute;t m&ugrave;i - Đồ gia dụng...)</li>\r\n	<li>Sửa chữa v&agrave; bảo dưỡng thiết bị nh&agrave; bếp</li>\r\n	<li>Lắp đặt trang thiết bị bếp nh&agrave; h&agrave;ng kh&aacute;ch sạn, hệ thống Gas c&ocirc;ng nghiệp...</li>\r\n	<li><img alt=\"Không có mô tả ảnh.\" src=\"https://scontent.fhan2-3.fna.fbcdn.net/v/t1.6435-9/199039288_1665823173605764_6010671126037052980_n.jpg?_nc_cat=107&amp;ccb=1-5&amp;_nc_sid=973b4a&amp;_nc_ohc=JbO64j_UcY0AX958mCS&amp;_nc_oc=AQli3825nkxuBaXdxgUWu_8G_Hfx62uFFSel6i3sQtnZizg2GbJ-GVcZM9V3zuB-SC4&amp;_nc_ht=scontent.fhan2-3.fna&amp;oh=00_AT99bReXQvvwtKKJ0isFoPN2eMPhPTLS8TsoJRJAd29iFg&amp;oe=61DED1DB\" /></li>\r\n</ul>\r\n\r\n<h1>QUAN ĐIỂM <strong>KINH DOANH</strong></h1>\r\n\r\n<p>Kh&aacute;ch h&agrave;ng l&agrave; gi&aacute; trị cơ bản của bất k&igrave; doanh nghiệp n&agrave;o đ&oacute; cũng l&agrave; l&yacute; do để doanh nghiệp tồn tại v&agrave; ph&aacute;t triển. Đối với ch&uacute;ng t&ocirc;i kh&aacute;ch h&agrave;ng kh&ocirc;ng chỉ l&agrave; Thượng Đế m&agrave; c&ograve;n l&agrave; những người bạn th&acirc;n thiết, đồng h&agrave;nh c&ugrave;ng với ch&uacute;ng t&ocirc;i trong qu&aacute; tr&igrave;nh ph&aacute;t triển.</p>\r\n\r\n<p>Sử dụng thiết bị nh&agrave; bếp an to&agrave;n, chất lượng l&agrave; sự quan t&acirc;m h&agrave;ng đầu của bất cứ người nội trợ n&agrave;o. BEPTOT.VN lắng nghe, v&agrave; thấu hiểu những nhu cầu đ&oacute;.</p>\r\n\r\n<p>Ch&uacute;ng t&ocirc;i t&ocirc;n trọng kh&aacute;ch h&agrave;ng v&agrave; lu&ocirc;n nỗ lực ph&aacute;t triển để đ&aacute;p ứng tốt nhất y&ecirc;u cầu về chất lượng v&agrave; sự tin tưởng của kh&aacute;ch h&agrave;ng d&agrave;nh cho BEPTOT.VN trong suốt thời gian qua.</p>\r\n\r\n<p>Đặt phương ch&acirc;m “Chất lượng đảm bảo, gi&aacute; th&agrave;nh hợp l&yacute;” v&agrave; uy t&iacute;n l&ecirc;n h&agrave;ng đầu.</p>\r\n\r\n<p>Nhiều năm qua BEPTOT.VN vinh dự được người ti&ecirc;u d&ugrave;ng b&igrave;nh chọn l&agrave; một trong những địa chỉ cung cấp thiết bị nh&agrave; bếp ch&iacute;nh h&atilde;ng, uy t&iacute;n với kh&aacute;ch h&agrave;ng sử dụng cũng như l&agrave; đại l&yacute; tin cậy của c&aacute;c h&atilde;ng sản xuất lớn tr&ecirc;n thế giới.</p>\r\n\r\n<h2>ĐỊNH HƯỚNG <strong>PH&Aacute;T TRIỂN</strong></h2>\r\n\r\n<p><img alt=\"\" src=\"https://beptot.vn/img/about/testi1.jpg\" /></p>\r\n\r\n<p>Lu&ocirc;n lu&ocirc;n giữ vững uy t&iacute;n sự tin cậy của kh&aacute;ch h&agrave;ng d&agrave;nh cho BEPTOT.VN v&agrave; ng&agrave;y c&agrave;ng ph&aacute;t triển ho&agrave;n thiện m&igrave;nh hơn nữa để phục vụ tốt nhất cho kh&aacute;ch h&agrave;ng.</p>\r\n\r\n<p>Một số h&igrave;nh ảnh Showroom c&ocirc;ng ty</p>\r\n\r\n<p><img alt=\"Có thể là hình ảnh về đường và văn bản cho biết \'THẾ GIỚI BẾP CHÂU ÂU FAGOR Nagakawa BOSCH Invented for THIẾT HIẾ BỊ NHÀ BẾP CAO CẤP FASTER FEectolm Binova BEPTOT.VN Bếp của HỌi nhà HO\'\" src=\"https://scontent.fhan2-1.fna.fbcdn.net/v/t39.30808-6/255340839_1777908822397198_1409386457660401257_n.jpg?_nc_cat=101&amp;ccb=1-5&amp;_nc_sid=973b4a&amp;_nc_ohc=TWi0hgXFJcIAX_5dCpo&amp;_nc_ht=scontent.fhan2-1.fna&amp;oh=00_AT8rvuuSWj4QuSJ6POhraRcVD5wHxw1AEmiqdaPw3qyV2Q&amp;oe=61BCBA7E\" /></p>\r\n\r\n<p><img alt=\"Có thể là hình ảnh về đường\" src=\"https://scontent.fhan2-2.fna.fbcdn.net/v/t39.30808-6/240594207_1748245915363489_8029364939393123011_n.jpg?_nc_cat=102&amp;ccb=1-5&amp;_nc_sid=973b4a&amp;_nc_ohc=NE5QHpX6VxAAX9_SMKS&amp;_nc_ht=scontent.fhan2-2.fna&amp;oh=00_AT_hDEaB9bHLyLQQr61XkUxjy1fbiHENrohipDtUDZPjuQ&amp;oe=61BCEC97\" /></p>\r\n\r\n<p><img alt=\"Không có mô tả ảnh.\" src=\"https://scontent.fhan2-1.fna.fbcdn.net/v/t39.30808-6/240917463_1720455944809153_5582161594963379688_n.jpg?_nc_cat=101&amp;ccb=1-5&amp;_nc_sid=973b4a&amp;_nc_ohc=hoV_mFngc_4AX-C4rHg&amp;_nc_ht=scontent.fhan2-1.fna&amp;oh=00_AT86ndJjZRGvltz9HmlK5aJF0rIVZ3hTcF8tSwylP2a-9A&amp;oe=61BD3F0A\" /></p>\r\n\r\n<p><img alt=\"Có thể là hình ảnh về ngoài trời\" src=\"https://scontent.fhan2-2.fna.fbcdn.net/v/t39.30808-6/238029393_1708428422678572_6210771855426620878_n.jpg?_nc_cat=111&amp;ccb=1-5&amp;_nc_sid=973b4a&amp;_nc_ohc=SnsHlCZBWroAX_eaSIq&amp;_nc_ht=scontent.fhan2-2.fna&amp;oh=00_AT9PC_k5x3GMUgm6ct9YvFEE0VUhghkezSSpExOpbrtsSA&amp;oe=61BC8DC0\" /></p>', NULL, 'hihiiiiiiiiiiiiii', '156 Lạc Trung, Q. Hai Bà Trưng, HN', NULL, NULL, NULL, 'một vài dòng giới thiệu ....', 'một vài dòng giới thiệu ....', 'một vài dòng giới thiệu ....', 'một vài dòng giới thiệu ....');
 
 -- ----------------------------
 -- Table structure for contacts
@@ -802,13 +861,13 @@ CREATE TABLE `contacts`  (
   `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
   `user_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `email` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL,
-  `phone_number` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `phone_number` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL,
   `address` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL,
   `content` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `created_at` timestamp(0) NULL DEFAULT NULL,
   `updated_at` timestamp(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of contacts
@@ -820,6 +879,8 @@ INSERT INTO `contacts` VALUES (4, 'êdcsdf', 'thangnguyennvt1410@gmail.com', '09
 INSERT INTO `contacts` VALUES (5, 'êdcsdf', 'thangnguyennvt1410@gmail.com', '0984920986', 'dsf', 'sdfsdfsdfsdf', '2022-03-22 22:50:05', '2022-03-22 22:50:05');
 INSERT INTO `contacts` VALUES (6, 'êdcsdf', 'thangnguyennvt1410@gmail.com', '0984920986', 'dsf', 'sdfsdfsdfsdf', '2022-03-22 22:50:29', '2022-03-22 22:50:29');
 INSERT INTO `contacts` VALUES (7, 'sđs', 'admin@gmail.com', '0363676992', 'df', 'sdfsdf', '2022-03-22 22:51:16', '2022-03-22 22:51:16');
+INSERT INTO `contacts` VALUES (8, 'bbbbbbbbbbbb', 'hangnt.ptkd@tanphat.com', NULL, NULL, 'bbbbbbbbbbbbbbbbbbb', '2023-02-27 13:53:44', '2023-02-27 13:53:44');
+INSERT INTO `contacts` VALUES (9, 'fd', 'hangnt.ptkd@tanphat.com', NULL, NULL, 'vvbvbbv', '2023-02-28 05:09:52', '2023-02-28 05:09:52');
 
 -- ----------------------------
 -- Table structure for customer_groups
@@ -1678,7 +1739,7 @@ CREATE TABLE `files`  (
   `updated_at` timestamp(0) NULL DEFAULT NULL,
   `name` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 503 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 615 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of files
@@ -1773,11 +1834,8 @@ INSERT INTO `files` VALUES (149, '\\uploads\\category_banners\\banner-topjpg-162
 INSERT INTO `files` VALUES (152, '\\uploads\\category_banners\\cate-sliderpng-1628307179-6Js8.png', 'banner', 16, 'App\\Model\\Admin\\Category', '2021-08-07 10:32:59', '2021-08-07 10:32:59', 'cate_slider.png');
 INSERT INTO `files` VALUES (153, '\\uploads\\products\\home-page-product-grid-images-0000-water-softenerjpg-1628320262-kx7n.jpg', 'image', 34, 'App\\Model\\Admin\\Product', '2021-08-07 14:11:02', '2021-08-07 14:11:02', 'Home_Page_Product_Grid_Images_0000_Water-Softener.jpg');
 INSERT INTO `files` VALUES (154, '\\uploads\\products\\hesoft-angle-1jpg-1628321803-Kx6Z.jpg', 'image', 35, 'App\\Model\\Admin\\Product', '2021-08-07 14:36:43', '2021-08-07 14:36:43', 'HEsoft-angle-1.jpg');
-INSERT INTO `files` VALUES (155, '\\uploads\\posts\\why-test-well-water-500x500-1png-1628324786-DJmQ.png', 'image', 15, 'App\\Model\\Admin\\Post', '2021-08-07 15:26:26', '2021-08-07 15:26:26', 'why-test-well-water-500x500-1.png');
-INSERT INTO `files` VALUES (156, '\\uploads\\posts\\shutterstock-1568600659-water-test-500x500-1jpg-1628324849-caMZ.jpg', 'image', 14, 'App\\Model\\Admin\\Post', '2021-08-07 15:27:29', '2021-08-07 15:27:29', 'shutterstock_1568600659-water-test-500x500-1.jpg');
 INSERT INTO `files` VALUES (157, '\\uploads\\product_gallery\\when-to-replace-water-softenerjpg-1628329059-OXNS.jpg', NULL, 1, 'App\\Model\\Admin\\ProductGallery', '2021-08-07 16:37:39', '2021-08-07 16:37:39', 'when-to-replace-water-softener.jpg');
 INSERT INTO `files` VALUES (159, '\\uploads\\product_gallery\\shutterstock-1568600659-water-test-500x500-1jpg-1628329060-tAqc.jpg', NULL, 3, 'App\\Model\\Admin\\ProductGallery', '2021-08-07 16:37:40', '2021-08-07 16:37:40', 'shutterstock_1568600659-water-test-500x500-1.jpg');
-INSERT INTO `files` VALUES (160, '\\uploads\\blocks\\logo-loi-toanpng-1628482588-cgQ4.png', 'image', 1, 'App\\Model\\Admin\\Block', '2021-08-09 11:16:28', '2021-08-09 11:16:28', 'logo-loi-toan.png');
 INSERT INTO `files` VALUES (161, '\\uploads\\post_categories\\why-test-well-water-500x500-1png-1628849578-pnL8.png', 'image', 3, 'App\\Model\\Admin\\PostCategory', '2021-08-13 17:12:58', '2021-08-13 17:12:58', 'why-test-well-water-500x500-1.png');
 INSERT INTO `files` VALUES (162, '\\uploads\\post_categories\\why-test-well-water-500x500-1png-1628850248-ahQS.png', 'image', 4, 'App\\Model\\Admin\\PostCategory', '2021-08-13 17:24:09', '2021-08-13 17:24:09', 'why-test-well-water-500x500-1.png');
 INSERT INTO `files` VALUES (163, '\\uploads\\post_categories\\why-test-well-water-500x500-1png-1628850269-FdZh.png', 'image', 5, 'App\\Model\\Admin\\PostCategory', '2021-08-13 17:24:29', '2021-08-13 17:24:29', 'why-test-well-water-500x500-1.png');
@@ -1785,7 +1843,6 @@ INSERT INTO `files` VALUES (164, '\\uploads\\post_categories\\why-test-well-wate
 INSERT INTO `files` VALUES (165, '\\uploads\\post_categories\\tranh-to-mau-canh-sat-cho-bejpg-1628850920-fqL9.jpg', 'image', 7, 'App\\Model\\Admin\\PostCategory', '2021-08-13 17:35:20', '2021-08-13 17:35:20', 'tranh-to-mau-canh-sat-cho-be.jpg');
 INSERT INTO `files` VALUES (166, '\\uploads\\post_categories\\why-test-well-water-500x500-1png-1628851316-H1hI.png', 'image', 8, 'App\\Model\\Admin\\PostCategory', '2021-08-13 17:41:56', '2021-08-13 17:41:56', 'why-test-well-water-500x500-1.png');
 INSERT INTO `files` VALUES (167, '\\uploads\\post_categories\\why-test-well-water-500x500-1png-1628851329-IV1X.png', 'image', 9, 'App\\Model\\Admin\\PostCategory', '2021-08-13 17:42:09', '2021-08-13 17:42:09', 'why-test-well-water-500x500-1.png');
-INSERT INTO `files` VALUES (168, '\\uploads\\posts\\tranh-to-mau-o-to-canh-sat-dang-yeujpg-1629347007-NHGh.jpg', 'image', 16, 'App\\Model\\Admin\\Post', '2021-08-19 11:23:27', '2021-08-19 11:23:27', 'tranh-to-mau-o-to-canh-sat-dang-yeu.jpg');
 INSERT INTO `files` VALUES (170, '\\uploads\\post_categories\\postsz2466566826235-fbd2479e18bb9fdda34794bf6455738cjpg-1621353516-1wlujpg-1630145834-bGRS.jpg', 'image', 2, 'App\\Model\\Admin\\PostCategory', '2021-08-28 17:17:15', '2021-08-28 17:17:15', 'postsz2466566826235-fbd2479e18bb9fdda34794bf6455738cjpg-1621353516-1wlu.jpg');
 INSERT INTO `files` VALUES (171, '\\uploads\\categories\\01jpg-1640584417-vslf-1jpg-1640832457-eVA6.jpg', 'image', 23, 'App\\Model\\Admin\\Category', '2021-12-30 09:47:37', '2021-12-30 09:47:37', '01jpg-1640584417-VSlf (1).jpg');
 INSERT INTO `files` VALUES (172, '\\uploads\\products\\01jpg-1640584417-vslfjpg-1640847648-05mo.jpg', 'image', 36, 'App\\Model\\Admin\\Product', '2021-12-30 14:00:48', '2021-12-30 14:00:48', '01jpg-1640584417-VSlf.jpg');
@@ -1826,7 +1883,6 @@ INSERT INTO `files` VALUES (310, '\\uploads\\product_gallery\\01jpg-1640584417-v
 INSERT INTO `files` VALUES (314, '\\uploads\\product_gallery\\01jpg-1640584417-vslfjpg-1640860583-QNZ1.jpg', NULL, 65, 'App\\Model\\Admin\\ProductGallery', '2022-01-16 15:47:01', '2022-01-16 15:47:01', '01jpg-1640584417-VSlf.jpg');
 INSERT INTO `files` VALUES (332, '\\uploads\\product_gallery\\01jpg-1640584417-vslfjpg-1640860583-QNZ1.jpg', NULL, 74, 'App\\Model\\Admin\\ProductGallery', '2022-01-16 15:50:16', '2022-01-16 15:50:16', '01jpg-1640584417-VSlf.jpg');
 INSERT INTO `files` VALUES (333, '\\uploads\\products\\01jpg-1640584417-vslf-1jpg-1640860583-B2Ta.jpg', 'image', 3, 'App\\Model\\Admin\\Product', '2022-01-16 15:50:16', '2022-01-16 15:50:16', '01jpg-1640584417-VSlf.jpg');
-INSERT INTO `files` VALUES (369, '\\uploads\\banners\\a4e1638ca5d16f8f36c0x1030x340x4jpg-1642692045-FHXw.jpg', 'image', 12, 'App\\Model\\Admin\\Banner', '2022-01-20 22:20:45', '2022-01-20 22:20:45', 'a4e1638ca5d16f8f36c0x1030x340x4.jpg');
 INSERT INTO `files` VALUES (384, '\\uploads\\products\\3e3199023515fe4ba704jpg-1645260385-EFMA.jpg', 'image', 15, 'App\\Model\\Admin\\Product', '2022-02-19 15:46:26', '2022-02-19 15:46:26', '3e3199023515fe4ba704.jpg');
 INSERT INTO `files` VALUES (385, '\\uploads\\product_gallery\\3e3199023515fe4ba704jpg-1645260386-0Vqz.jpg', NULL, 86, 'App\\Model\\Admin\\ProductGallery', '2022-02-19 15:46:26', '2022-02-19 15:46:26', '3e3199023515fe4ba704.jpg');
 INSERT INTO `files` VALUES (386, '\\uploads\\products\\272315074-3812532442304694-1371060862871309469-njpg-1645260759-2Zy2.jpg', 'image', 16, 'App\\Model\\Admin\\Product', '2022-02-19 15:52:40', '2022-02-19 15:52:40', '272315074_3812532442304694_1371060862871309469_n.jpg');
@@ -1836,7 +1892,6 @@ INSERT INTO `files` VALUES (395, '\\uploads\\categories\\3-1-x350x150x4jpg-16463
 INSERT INTO `files` VALUES (396, '\\uploads\\categories\\3-1-x350x150x4jpg-1646368739-Gcus.jpg', 'image', 13, 'App\\Model\\Admin\\Category', '2022-03-04 11:38:59', '2022-03-04 11:38:59', '3-1-x350x150x4.jpg');
 INSERT INTO `files` VALUES (397, '\\uploads\\categories\\3-1-x350x150x4jpg-1646451349-NHFi.jpg', 'image', 14, 'App\\Model\\Admin\\Category', '2022-03-05 10:35:49', '2022-03-05 10:35:49', '3-1-x350x150x4.jpg');
 INSERT INTO `files` VALUES (398, '\\uploads\\categories\\3-1-x350x150x4jpg-1646453643-oHS7.jpg', 'image', 15, 'App\\Model\\Admin\\Category', '2022-03-05 11:14:03', '2022-03-05 11:14:03', '3-1-x350x150x4.jpg');
-INSERT INTO `files` VALUES (399, '\\uploads\\banners\\ttxvnhanoijpg-1646709696-emHQ.jpg', 'image', 11, 'App\\Model\\Admin\\Banner', '2022-03-08 10:21:36', '2022-03-08 10:21:36', 'ttxvnhanoi.jpg');
 INSERT INTO `files` VALUES (401, '\\uploads\\banners\\ttxvnhanoijpg-1646709711-fDWC.jpg', 'image', 9, 'App\\Model\\Admin\\Banner', '2022-03-08 10:21:51', '2022-03-08 10:21:51', 'ttxvnhanoi.jpg');
 INSERT INTO `files` VALUES (402, '\\uploads\\banners\\ttxvnhanoijpg-1646709718-kCjE.jpg', 'image', 8, 'App\\Model\\Admin\\Banner', '2022-03-08 10:21:58', '2022-03-08 10:21:58', 'ttxvnhanoi.jpg');
 INSERT INTO `files` VALUES (403, '\\uploads\\banners\\ttxvnhanoijpg-1646709724-rFdT.jpg', 'image', 7, 'App\\Model\\Admin\\Banner', '2022-03-08 10:22:04', '2022-03-08 10:22:04', 'ttxvnhanoi.jpg');
@@ -1912,6 +1967,96 @@ INSERT INTO `files` VALUES (492, '\\uploads\\product_gallery\\hinh-nen-galaxy-wa
 INSERT INTO `files` VALUES (493, '\\uploads\\products\\qxa716b-1540551520png-1649163159-0UC8.png', 'image', 2, 'App\\Model\\Admin\\Product', '2022-04-05 19:52:40', '2022-04-05 19:52:40', 'qxa716b_1540551520.png');
 INSERT INTO `files` VALUES (494, '\\uploads\\configs\\output-onlinepngtools-4png-1649400499-RCB7.png', 'favicon', 1, 'App\\Model\\Admin\\Config', '2022-04-08 13:48:19', '2022-04-08 13:48:19', 'output-onlinepngtools (4).png');
 INSERT INTO `files` VALUES (502, '\\uploads\\products\\z3337442960186-db8eb8eded7c822cfd7505240c80f636jpg-1649844033-jliM.jpg', 'image', 23, 'App\\Model\\Admin\\Product', '2022-04-13 17:00:34', '2022-04-13 17:00:34', 'z3337442960186_db8eb8eded7c822cfd7505240c80f636.jpg');
+INSERT INTO `files` VALUES (503, '/uploads/posts/img4jpg-1653670581-sXn9.jpg', 'image', 5, 'App\\Model\\Admin\\Post', '2022-05-27 23:56:21', '2022-05-27 23:56:21', 'img4.jpg');
+INSERT INTO `files` VALUES (504, '/uploads/posts/624593777-minjpg-1653671475-rnUW.jpg', 'image', 6, 'App\\Model\\Admin\\Post', '2022-05-28 00:11:15', '2022-05-28 00:11:15', '624593777-min.jpg');
+INSERT INTO `files` VALUES (505, '/uploads/posts/2094950017-minjpg-1653671629-TWDb.jpg', 'image', 7, 'App\\Model\\Admin\\Post', '2022-05-28 00:13:49', '2022-05-28 00:13:49', '2094950017-min.jpg');
+INSERT INTO `files` VALUES (506, '/uploads/posts/shutterstock-759730900-minjpg-1653671923-4sxg.jpg', 'image', 8, 'App\\Model\\Admin\\Post', '2022-05-28 00:18:43', '2022-05-28 00:18:43', 'shutterstock_759730900-min.jpg');
+INSERT INTO `files` VALUES (507, '/uploads/posts/shutterstock-759730900-minjpg-1653705945-KFPD.jpg', 'image', 9, 'App\\Model\\Admin\\Post', '2022-05-28 09:45:45', '2022-05-28 09:45:45', 'shutterstock_759730900-min.jpg');
+INSERT INTO `files` VALUES (508, '/uploads/posts/624593777-minjpg-1653706020-WgGX.jpg', 'image', 10, 'App\\Model\\Admin\\Post', '2022-05-28 09:47:00', '2022-05-28 09:47:00', '624593777-min.jpg');
+INSERT INTO `files` VALUES (509, '/uploads/posts/shutterstock-300401156-minjpg-1653706084-Blf6.jpg', 'image', 11, 'App\\Model\\Admin\\Post', '2022-05-28 09:48:04', '2022-05-28 09:48:04', 'shutterstock_300401156-min.jpg');
+INSERT INTO `files` VALUES (510, '/uploads/posts/img4jpg-1653884149-wIbj.jpg', 'image', 12, 'App\\Model\\Admin\\Post', '2022-05-30 11:15:49', '2022-05-30 11:15:49', 'img4.jpg');
+INSERT INTO `files` VALUES (511, '/uploads/posts/shutterstock-759730900-minjpg-1653884244-XVOF.jpg', 'image', 13, 'App\\Model\\Admin\\Post', '2022-05-30 11:17:24', '2022-05-30 11:17:24', 'shutterstock_759730900-min.jpg');
+INSERT INTO `files` VALUES (512, '/uploads/posts/1310dienmattroijpg-1653968899-G1zh.jpg', 'image', 14, 'App\\Model\\Admin\\Post', '2022-05-31 10:48:19', '2022-05-31 10:48:19', '1310dienmattroi.jpg');
+INSERT INTO `files` VALUES (513, '/uploads/posts/moit-propose-auctions-for-renewable-energyjpg-1653968979-cuHV.jpg', 'image', 15, 'App\\Model\\Admin\\Post', '2022-05-31 10:49:39', '2022-05-31 10:49:39', 'moit_propose_auctions_for_renewable_energy.jpg');
+INSERT INTO `files` VALUES (514, '/uploads/posts/dien-giopng-1653969200-eAKU.png', 'image', 16, 'App\\Model\\Admin\\Post', '2022-05-31 10:53:20', '2022-05-31 10:53:20', 'dien-gio.png');
+INSERT INTO `files` VALUES (515, '/uploads/posts/dien-giopng-1653969283-N9tw.png', 'image', 16, 'App\\Model\\Admin\\Post', '2022-05-31 10:54:43', '2022-05-31 10:54:43', 'dien-gio.png');
+INSERT INTO `files` VALUES (516, '/uploads/posts/moit-propose-auctions-for-renewable-energyjpg-1653969301-ppeV.jpg', 'image', 15, 'App\\Model\\Admin\\Post', '2022-05-31 10:55:01', '2022-05-31 10:55:01', 'moit_propose_auctions_for_renewable_energy.jpg');
+INSERT INTO `files` VALUES (517, '/uploads/posts/1310dienmattroijpg-1653969312-YJKh.jpg', 'image', 14, 'App\\Model\\Admin\\Post', '2022-05-31 10:55:12', '2022-05-31 10:55:12', '1310dienmattroi.jpg');
+INSERT INTO `files` VALUES (518, '/uploads/posts/1jpg-1655354967-Pvql.jpg', 'image', 17, 'App\\Model\\Admin\\Post', '2022-06-16 11:49:27', '2022-06-16 11:49:27', '1.jpg');
+INSERT INTO `files` VALUES (519, '/uploads/posts/2jpg-1655355044-zY8c.jpg', 'image', 18, 'App\\Model\\Admin\\Post', '2022-06-16 11:50:44', '2022-06-16 11:50:44', '2.jpg');
+INSERT INTO `files` VALUES (520, '/uploads/posts/4jpg-1655355176-GTIh.jpg', 'image', 19, 'App\\Model\\Admin\\Post', '2022-06-16 11:52:56', '2022-06-16 11:52:56', '4.jpg');
+INSERT INTO `files` VALUES (521, '/uploads/posts/5jpg-1655355299-mit2.jpg', 'image', 20, 'App\\Model\\Admin\\Post', '2022-06-16 11:54:59', '2022-06-16 11:54:59', '5.jpg');
+INSERT INTO `files` VALUES (522, '/uploads/posts/6jpeg-1655355370-2wJC.jpeg', 'image', 21, 'App\\Model\\Admin\\Post', '2022-06-16 11:56:10', '2022-06-16 11:56:10', '6.jpeg');
+INSERT INTO `files` VALUES (523, '/uploads/posts/7jpg-1655355435-8N7i.jpg', 'image', 22, 'App\\Model\\Admin\\Post', '2022-06-16 11:57:15', '2022-06-16 11:57:15', '7.jpg');
+INSERT INTO `files` VALUES (524, '/uploads/posts/8jpg-1655355516-b4D4.jpg', 'image', 23, 'App\\Model\\Admin\\Post', '2022-06-16 11:58:36', '2022-06-16 11:58:36', '8.jpg');
+INSERT INTO `files` VALUES (525, '/uploads/posts/zzjpg-1655701340-OZZT.jpg', 'image', 24, 'App\\Model\\Admin\\Post', '2022-06-20 12:02:20', '2022-06-20 12:02:20', 'zz.jpg');
+INSERT INTO `files` VALUES (526, '/uploads/posts/b1jpg-1656556074-6EMX.jpg', 'image', 25, 'App\\Model\\Admin\\Post', '2022-06-30 09:27:54', '2022-06-30 09:27:54', 'b1.jpg');
+INSERT INTO `files` VALUES (527, '/uploads/posts/b2png-1656556175-Wy7T.png', 'image', 26, 'App\\Model\\Admin\\Post', '2022-06-30 09:29:35', '2022-06-30 09:29:35', 'b2.png');
+INSERT INTO `files` VALUES (528, '/uploads/posts/b3jpg-1656556267-6UP0.jpg', 'image', 27, 'App\\Model\\Admin\\Post', '2022-06-30 09:31:07', '2022-06-30 09:31:07', 'b3.jpg');
+INSERT INTO `files` VALUES (529, '/uploads/posts/b1jpg-1656556324-bIJ8.jpg', 'image', 28, 'App\\Model\\Admin\\Post', '2022-06-30 09:32:04', '2022-06-30 09:32:04', 'b1.jpg');
+INSERT INTO `files` VALUES (530, '/uploads/posts/b2png-1656556373-D8HR.png', 'image', 29, 'App\\Model\\Admin\\Post', '2022-06-30 09:32:53', '2022-06-30 09:32:53', 'b2.png');
+INSERT INTO `files` VALUES (531, '/uploads/posts/b3jpg-1656556415-KCYw.jpg', 'image', 30, 'App\\Model\\Admin\\Post', '2022-06-30 09:33:35', '2022-06-30 09:33:35', 'b3.jpg');
+INSERT INTO `files` VALUES (532, '/uploads/posts/ypng-1657615842-RmW2.png', 'image', 31, 'App\\Model\\Admin\\Post', '2022-07-12 15:50:42', '2022-07-12 15:50:42', 'y.png');
+INSERT INTO `files` VALUES (533, '/uploads/posts/ypng-1657615882-mOls.png', 'image', 32, 'App\\Model\\Admin\\Post', '2022-07-12 15:51:22', '2022-07-12 15:51:22', 'y.png');
+INSERT INTO `files` VALUES (534, '/uploads/posts/untitledjpg-1657875733-q7MK.jpg', 'image', 33, 'App\\Model\\Admin\\Post', '2022-07-15 16:02:13', '2022-07-15 16:02:13', 'Untitled.jpg');
+INSERT INTO `files` VALUES (535, '/uploads/posts/untitledjpg-1657875777-x95E.jpg', 'image', 34, 'App\\Model\\Admin\\Post', '2022-07-15 16:02:57', '2022-07-15 16:02:57', 'Untitled.jpg');
+INSERT INTO `files` VALUES (536, '/uploads/posts/gateway-battery-e1597868050146jpeg-1657875869-QI9Y.jpeg', 'image', 35, 'App\\Model\\Admin\\Post', '2022-07-15 16:04:29', '2022-07-15 16:04:29', 'Gateway-battery-e1597868050146.jpeg');
+INSERT INTO `files` VALUES (537, '/uploads/posts/z3565712218152-b0b929b61c0c140fe93dfb0b6b41546bjpg-1657876011-ZL3L.jpg', 'image', 36, 'App\\Model\\Admin\\Post', '2022-07-15 16:06:51', '2022-07-15 16:06:51', 'z3565712218152_b0b929b61c0c140fe93dfb0b6b41546b.jpg');
+INSERT INTO `files` VALUES (538, '/uploads/posts/dmt-nn1jpg-1658223436-ElBx.jpg', 'image', 37, 'App\\Model\\Admin\\Post', '2022-07-19 16:37:16', '2022-07-19 16:37:16', 'dmt-nn1.jpg');
+INSERT INTO `files` VALUES (539, '/uploads/posts/dmt-nn1jpg-1658223470-B68W.jpg', 'image', 38, 'App\\Model\\Admin\\Post', '2022-07-19 16:37:50', '2022-07-19 16:37:50', 'dmt-nn1.jpg');
+INSERT INTO `files` VALUES (540, '/uploads/posts/image3-01png-1658223603-2EUd.png', 'image', 39, 'App\\Model\\Admin\\Post', '2022-07-19 16:40:03', '2022-07-19 16:40:03', 'image3-01.png');
+INSERT INTO `files` VALUES (541, '/uploads/posts/pasted-image-0png-1658715508-3IEp.png', 'image', 40, 'App\\Model\\Admin\\Post', '2022-07-25 09:18:28', '2022-07-25 09:18:28', 'pasted image 0.png');
+INSERT INTO `files` VALUES (542, '/uploads/posts/pasted-image-0png-1658715582-x85v.png', 'image', 41, 'App\\Model\\Admin\\Post', '2022-07-25 09:19:42', '2022-07-25 09:19:42', 'pasted image 0.png');
+INSERT INTO `files` VALUES (543, '/uploads/posts/pasted-image-0-1png-1658715783-um3A.png', 'image', 42, 'App\\Model\\Admin\\Post', '2022-07-25 09:23:03', '2022-07-25 09:23:03', 'pasted image 0 (1).png');
+INSERT INTO `files` VALUES (544, '/uploads/posts/pasted-image-0png-1659684404-Gcym.png', 'image', 43, 'App\\Model\\Admin\\Post', '2022-08-05 14:26:44', '2022-08-05 14:26:44', 'pasted image 0.png');
+INSERT INTO `files` VALUES (545, '/uploads/posts/pasted-image-0png-1659684449-TcO5.png', 'image', 44, 'App\\Model\\Admin\\Post', '2022-08-05 14:27:29', '2022-08-05 14:27:29', 'pasted image 0.png');
+INSERT INTO `files` VALUES (546, '/uploads/posts/cong-truongjpg-1659684507-gIFn.jpg', 'image', 45, 'App\\Model\\Admin\\Post', '2022-08-05 14:28:27', '2022-08-05 14:28:27', 'Công trường.jpg');
+INSERT INTO `files` VALUES (547, '/uploads/posts/cong-truongjpg-1659684548-Vzn0.jpg', 'image', 46, 'App\\Model\\Admin\\Post', '2022-08-05 14:29:08', '2022-08-05 14:29:08', 'Công trường.jpg');
+INSERT INTO `files` VALUES (548, '/uploads/posts/pasted-image-0-1png-1659684738-eRNx.png', 'image', 47, 'App\\Model\\Admin\\Post', '2022-08-05 14:32:18', '2022-08-05 14:32:18', 'pasted image 0 (1).png');
+INSERT INTO `files` VALUES (555, '/uploads/banners/nwaivqjpg-1666257965-nvg5.jpg', 'image', 14, 'App\\Model\\Admin\\Banner', '2022-10-20 16:26:05', '2022-10-20 16:26:05', 'nWaiVQ.jpg');
+INSERT INTO `files` VALUES (556, '/uploads/banners/138728jpg-1666257984-5FCU.jpg', 'image', 15, 'App\\Model\\Admin\\Banner', '2022-10-20 16:26:24', '2022-10-20 16:26:24', '138728.jpg');
+INSERT INTO `files` VALUES (558, '\\uploads\\blocks\\138728jpg-1666259872-ITA3.jpg', 'image', 1, 'App\\Model\\Admin\\Block', '2022-10-20 16:57:52', '2022-10-20 16:57:52', '138728.jpg');
+INSERT INTO `files` VALUES (559, '\\uploads\\business\\nwaivqjpg-1666274310-z2oR.jpg', 'image', 5, 'App\\Model\\Admin\\BusinessSector', '2022-10-20 20:58:30', '2022-10-20 20:58:30', 'nWaiVQ.jpg');
+INSERT INTO `files` VALUES (560, '\\uploads\\posts\\nwaivqjpg-1666278689-nQzs.jpg', 'image', 48, 'App\\Model\\Admin\\Post', '2022-10-20 22:11:29', '2022-10-20 22:11:29', 'nWaiVQ.jpg');
+INSERT INTO `files` VALUES (561, '\\uploads\\business\\nwaivqjpg-1666412625-1gMt.jpg', 'image', 1, 'App\\Model\\Admin\\BusinessSector', '2022-10-22 11:23:45', '2022-10-22 11:23:45', 'nWaiVQ.jpg');
+INSERT INTO `files` VALUES (562, '\\uploads\\business\\138728jpg-1666412651-BMxv.jpg', 'image', 2, 'App\\Model\\Admin\\BusinessSector', '2022-10-22 11:24:11', '2022-10-22 11:24:11', '138728.jpg');
+INSERT INTO `files` VALUES (563, '\\uploads\\business\\nwaivqjpg-1666412666-0Aga.jpg', 'image', 3, 'App\\Model\\Admin\\BusinessSector', '2022-10-22 11:24:26', '2022-10-22 11:24:26', 'nWaiVQ.jpg');
+INSERT INTO `files` VALUES (564, '\\uploads\\project_categories\\phoimausonbietthudeppng-1666758696-zMG4.png', 'image', 1, 'App\\Model\\Admin\\ProjectCategory', '2022-10-26 11:31:36', '2022-10-26 11:31:36', 'phoimausonbietthudep.png');
+INSERT INTO `files` VALUES (565, '\\uploads\\project\\nwaivqjpg-1666767054-gSOb.jpg', 'image', 1, 'App\\Model\\Admin\\Project', '2022-10-26 13:50:54', '2022-10-26 13:50:54', 'nWaiVQ.jpg');
+INSERT INTO `files` VALUES (566, '\\uploads\\project_categories\\chon-mau-son-nha-cho-nguoi-menh-thuy-1jpg-1666770123-NO3c.jpg', 'image', 2, 'App\\Model\\Admin\\ProjectCategory', '2022-10-26 14:42:03', '2022-10-26 14:42:03', 'chon-mau-son-nha-cho-nguoi-menh-thuy-1.jpg');
+INSERT INTO `files` VALUES (567, '\\uploads\\project\\phoimausonbietthudeppng-1666770173-tFVo.png', 'image', 2, 'App\\Model\\Admin\\Project', '2022-10-26 14:42:53', '2022-10-26 14:42:53', 'phoimausonbietthudep.png');
+INSERT INTO `files` VALUES (568, '\\uploads\\regent\\tra-menh-ngu-hanh-theo-tuoi-1jpg-1670211657-0xup.jpg', 'image', 3, 'App\\Model\\Admin\\Regent', '2022-12-05 10:40:57', '2022-12-05 10:40:57', 'tra-menh-ngu-hanh-theo-tuoi (1).jpg');
+INSERT INTO `files` VALUES (569, '\\uploads\\partners\\screenshot-20221024-110942png-1672148989-jjf6png-1675140993-QEzr.png', 'image', 1, 'App\\Model\\Admin\\Partner', '2023-01-31 11:56:33', '2023-01-31 11:56:33', 'screenshot-20221024-110942png-1672148989-jjf6.png');
+INSERT INTO `files` VALUES (570, '\\uploads\\manufacturers\\rt-vi-removebg-preview-1png-1668580604-e5ctpng-1675143994-Ryt3.png', 'image', 1, 'App\\Model\\Admin\\InvestmentMarket', '2023-01-31 12:46:34', '2023-01-31 12:46:34', 'rt-vi-removebg-preview-1png-1668580604-e5Ct.png');
+INSERT INTO `files` VALUES (571, '\\uploads\\partners\\screenshot-20221024-110942png-1672148989-jjf6png-1675144091-W8q8.png', 'image', 2, 'App\\Model\\Admin\\Partner', '2023-01-31 12:48:11', '2023-01-31 12:48:11', 'screenshot-20221024-110942png-1672148989-jjf6.png');
+INSERT INTO `files` VALUES (572, '\\uploads\\manufacturers\\screenshot-20221024-111034png-1672147693-nf0upng-1675144103-yGKJ.png', 'image', 2, 'App\\Model\\Admin\\InvestmentMarket', '2023-01-31 12:48:23', '2023-01-31 12:48:23', 'screenshot-20221024-111034png-1672147693-nf0U.png');
+INSERT INTO `files` VALUES (573, '\\uploads\\investment_markets\\screenshot-20221024-110942png-1672203604-innspng-1675144304-Xvt1.png', 'image', 3, 'App\\Model\\Admin\\InvestmentMarket', '2023-01-31 12:51:44', '2023-01-31 12:51:44', 'screenshot-20221024-110942png-1672203604-iNNS.png');
+INSERT INTO `files` VALUES (574, '\\uploads\\investment_markets\\asia-travel-imagejpg-1660789057-9ytdjpg-1675144317-vZNc.jpg', 'image', 4, 'App\\Model\\Admin\\InvestmentMarket', '2023-01-31 12:51:57', '2023-01-31 12:51:57', 'asia-travel-imagejpg-1660789057-9YTD.jpg');
+INSERT INTO `files` VALUES (575, '\\uploads\\investment_markets\\rt-vi-removebg-preview-1png-1668580604-e5ctpng-1675145385-qOSM.png', 'image', 5, 'App\\Model\\Admin\\InvestmentMarket', '2023-01-31 13:09:45', '2023-01-31 13:09:45', 'rt-vi-removebg-preview-1png-1668580604-e5Ct.png');
+INSERT INTO `files` VALUES (576, '\\uploads\\investment_markets\\the-banner-of-the-national-liberation-forces-of-the-southern-vietnamjpg-1675145828-YFVR.jpg', 'image', 6, 'App\\Model\\Admin\\InvestmentMarket', '2023-01-31 13:17:08', '2023-01-31 13:17:08', 'the-banner-of-the-National-Liberation-Forces-of-the-Southern-Vietnam.jpg');
+INSERT INTO `files` VALUES (577, '\\uploads\\project_categories\\2jpg-1675148004-pjQH.jpg', 'image', 3, 'App\\Model\\Admin\\ProjectCategory', '2023-01-31 13:53:24', '2023-01-31 13:53:24', '2.jpg');
+INSERT INTO `files` VALUES (578, '\\uploads\\project_categories\\3jpg-1675148148-sWJV.jpg', 'image', 1, 'App\\Model\\Admin\\PartnerCategory', '2023-01-31 13:55:48', '2023-01-31 13:55:48', '3.jpg');
+INSERT INTO `files` VALUES (579, '\\uploads\\project_categories\\3jpg-1675148240-vDQb.jpg', 'image', 2, 'App\\Model\\Admin\\PartnerCategory', '2023-01-31 13:57:20', '2023-01-31 13:57:20', '3.jpg');
+INSERT INTO `files` VALUES (580, '\\uploads\\project_categories\\the-banner-of-the-national-liberation-forces-of-the-southern-vietnamjpg-1675148250-DN2X.jpg', 'image', 3, 'App\\Model\\Admin\\PartnerCategory', '2023-01-31 13:57:30', '2023-01-31 13:57:30', 'the-banner-of-the-National-Liberation-Forces-of-the-Southern-Vietnam.jpg');
+INSERT INTO `files` VALUES (583, '\\uploads\\partners\\3jpg-1675152600-NaNk.jpg', 'image', 3, 'App\\Model\\Admin\\Partner', '2023-01-31 15:10:00', '2023-01-31 15:10:00', '3.jpg');
+INSERT INTO `files` VALUES (584, '\\uploads\\partners\\the-banner-of-the-national-liberation-forces-of-the-southern-vietnamjpg-1675153588-p4zc.jpg', 'image', 4, 'App\\Model\\Admin\\Partner', '2023-01-31 15:26:28', '2023-01-31 15:26:28', 'the-banner-of-the-National-Liberation-Forces-of-the-Southern-Vietnam.jpg');
+INSERT INTO `files` VALUES (585, '\\uploads\\partners\\the-banner-of-the-national-liberation-forces-of-the-southern-vietnamjpg-1675154623-n9IW.jpg', 'image', 5, 'App\\Model\\Admin\\Partner', '2023-01-31 15:43:43', '2023-01-31 15:43:43', 'the-banner-of-the-National-Liberation-Forces-of-the-Southern-Vietnam.jpg');
+INSERT INTO `files` VALUES (586, '\\uploads\\investment_markets\\3jpg-1675154655-Mgho.jpg', 'image', 7, 'App\\Model\\Admin\\InvestmentMarket', '2023-01-31 15:44:15', '2023-01-31 15:44:15', '3.jpg');
+INSERT INTO `files` VALUES (587, '\\uploads\\users\\3jpg-1677309957-xjCJ.jpg', 'image', 1, 'App\\Model\\Common\\User', '2023-02-25 14:25:57', '2023-02-25 14:25:57', '3.jpg');
+INSERT INTO `files` VALUES (588, '\\uploads\\post_categories\\3jpg-1677312808-0oef.jpg', 'image', 3, 'App\\Model\\Admin\\PostCategory', '2023-02-25 15:13:28', '2023-02-25 15:13:28', '3.jpg');
+INSERT INTO `files` VALUES (589, '\\uploads\\posts\\3jpg-1677313657-fAnm.jpg', 'image', 49, 'App\\Model\\Admin\\Post', '2023-02-25 15:27:37', '2023-02-25 15:27:37', '3.jpg');
+INSERT INTO `files` VALUES (593, '/uploads/posts/visit-cairojpg-1677572256-JG3e.jpg', 'image', 50, 'App\\Model\\Admin\\Post', '2023-02-28 15:17:36', '2023-02-28 15:17:36', 'VISIT-CAIRO.jpg');
+INSERT INTO `files` VALUES (594, '/uploads/posts/top-places-to-visit-in-addis-ababajpg-1677572583-U1HL.jpg', 'image', 51, 'App\\Model\\Admin\\Post', '2023-02-28 15:23:03', '2023-02-28 15:23:03', 'Top-Places-To-Visit-In-Addis-Ababa.jpg');
+INSERT INTO `files` VALUES (603, '\\uploads\\posts\\top-places-to-visit-in-addis-ababajpg-1677575536-FknF.jpg', 'image', 52, 'App\\Model\\Admin\\Post', '2023-02-28 16:12:16', '2023-02-28 16:12:16', 'Top-Places-To-Visit-In-Addis-Ababa.jpg');
+INSERT INTO `files` VALUES (604, '\\uploads\\posts\\top-places-to-visit-in-addis-ababajpg-1677575536-r0Kb.jpg', 'banner', 52, 'App\\Model\\Admin\\Post', '2023-02-28 16:12:16', '2023-02-28 16:12:16', 'Top-Places-To-Visit-In-Addis-Ababa.jpg');
+INSERT INTO `files` VALUES (605, '\\uploads\\posts\\ben-amera-mauritania1jpg-1677575632-PweE.jpg', 'image', 53, 'App\\Model\\Admin\\Post', '2023-02-28 16:13:52', '2023-02-28 16:13:52', 'Ben-Amera-Mauritania1.jpg');
+INSERT INTO `files` VALUES (606, '\\uploads\\posts\\ben-amera-mauritania1jpg-1677575632-5ut1.jpg', 'banner', 53, 'App\\Model\\Admin\\Post', '2023-02-28 16:13:52', '2023-02-28 16:13:52', 'Ben-Amera-Mauritania1.jpg');
+INSERT INTO `files` VALUES (609, '/uploads/banners/best-travel-blogs-8jpg-1677575820-pXsU.jpg', 'image', 17, 'App\\Model\\Admin\\Banner', '2023-02-28 16:17:00', '2023-02-28 16:17:00', 'best-travel-blogs-8.jpg');
+INSERT INTO `files` VALUES (610, '/uploads/banners/getty-583734066-335273jpg-1677576069-fOrc.jpg', 'image', 16, 'App\\Model\\Admin\\Banner', '2023-02-28 16:21:09', '2023-02-28 16:21:09', 'getty_583734066_335273.jpg');
+INSERT INTO `files` VALUES (611, '\\uploads\\posts\\visit-venice-italyjpg-1677577631-ABxq.jpg', 'image', 54, 'App\\Model\\Admin\\Post', '2023-02-28 16:47:11', '2023-02-28 16:47:11', 'VISIT-VENICE-ITALY.jpg');
+INSERT INTO `files` VALUES (612, '\\uploads\\posts\\visit-venice-italyjpg-1677577631-C7k4.jpg', 'banner', 54, 'App\\Model\\Admin\\Post', '2023-02-28 16:47:11', '2023-02-28 16:47:11', 'VISIT-VENICE-ITALY.jpg');
+INSERT INTO `files` VALUES (613, '\\uploads\\posts\\cycling-in-portugaljpg-1677577680-dBUP.jpg', 'image', 55, 'App\\Model\\Admin\\Post', '2023-02-28 16:48:00', '2023-02-28 16:48:00', 'Cycling-in-Portugal.jpg');
+INSERT INTO `files` VALUES (614, '\\uploads\\posts\\cycling-in-portugaljpg-1677577680-xzl2.jpg', 'banner', 55, 'App\\Model\\Admin\\Post', '2023-02-28 16:48:00', '2023-02-28 16:48:00', 'Cycling-in-Portugal.jpg');
 
 -- ----------------------------
 -- Table structure for final_warehouse_adjust_details
@@ -2388,6 +2533,31 @@ CREATE TABLE `histories`  (
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
+-- Table structure for investment_markets
+-- ----------------------------
+DROP TABLE IF EXISTS `investment_markets`;
+CREATE TABLE `investment_markets`  (
+  `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `code` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `is_show` tinyint(4) NOT NULL,
+  `order` tinyint(4) NOT NULL,
+  `des` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `created_at` timestamp(0) NULL DEFAULT NULL,
+  `updated_at` timestamp(0) NULL DEFAULT NULL,
+  `created_by` int(11) NOT NULL,
+  `updated_by` int(11) NOT NULL,
+  `en_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `en_des` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of investment_markets
+-- ----------------------------
+INSERT INTO `investment_markets` VALUES (7, 'y', 'y', 1, 1, 'f', '2023-01-31 15:44:15', '2023-01-31 15:44:15', 1, 1, 'y', 'h');
+
+-- ----------------------------
 -- Table structure for languages
 -- ----------------------------
 DROP TABLE IF EXISTS `languages`;
@@ -2451,7 +2621,7 @@ CREATE TABLE `manufacturers`  (
   `updated_by` int(11) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `manufacturers_code_unique`(`code`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of manufacturers
@@ -2470,7 +2640,7 @@ CREATE TABLE `migrations`  (
   `migration` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `batch` int(11) NOT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 265 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 300 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of migrations
@@ -2725,6 +2895,41 @@ INSERT INTO `migrations` VALUES (261, '2022_04_16_114103_add_address_company_to_
 INSERT INTO `migrations` VALUES (262, '2022_05_04_170628_create_post_translations_table', 165);
 INSERT INTO `migrations` VALUES (263, '2022_05_05_014825_create_languages_table', 165);
 INSERT INTO `migrations` VALUES (264, '2022_05_05_014947_add_language_id_to_posts_table', 165);
+INSERT INTO `migrations` VALUES (265, '2022_05_06_154610_create_partners_table', 166);
+INSERT INTO `migrations` VALUES (266, '2022_05_06_161627_add_created_by_to_partners_table', 166);
+INSERT INTO `migrations` VALUES (267, '2022_05_11_200036_create_block2_table', 166);
+INSERT INTO `migrations` VALUES (268, '2022_05_30_101648_create_regent_table', 166);
+INSERT INTO `migrations` VALUES (269, '2022_05_31_151910_create_regent_language_table', 166);
+INSERT INTO `migrations` VALUES (270, '2022_06_01_121047_create_regent_experience_table', 166);
+INSERT INTO `migrations` VALUES (271, '2022_06_01_164645_create_projects_table', 166);
+INSERT INTO `migrations` VALUES (272, '2022_06_01_165009_create_project_languages_table', 166);
+INSERT INTO `migrations` VALUES (273, '2022_06_12_151601_add_sort_order_to_regents_table', 167);
+INSERT INTO `migrations` VALUES (274, '2022_10_20_170105_update_blocks_table_d201022', 168);
+INSERT INTO `migrations` VALUES (275, '2022_10_20_171344_update_blocks_table_d201022_2', 169);
+INSERT INTO `migrations` VALUES (276, '2022_10_20_173247_create_business_sectors_table', 170);
+INSERT INTO `migrations` VALUES (277, '2022_10_20_173353_create_business_sectors_languages_table', 170);
+INSERT INTO `migrations` VALUES (278, '2022_10_20_223834_update_stores_table_d201022', 171);
+INSERT INTO `migrations` VALUES (279, '2022_10_26_111737_create_project_categories_table', 172);
+INSERT INTO `migrations` VALUES (280, '2022_10_26_113810_update_projects_table_d2610', 173);
+INSERT INTO `migrations` VALUES (281, '2022_10_26_114527_update_project_categories_table_d2610', 174);
+INSERT INTO `migrations` VALUES (282, '2022_12_05_113154_update_table_contacts_v_1_1', 175);
+INSERT INTO `migrations` VALUES (283, '2023_01_18_164405_add_video_col_to_configs', 176);
+INSERT INTO `migrations` VALUES (284, '2023_01_18_171334_add_slogan_to_configs', 176);
+INSERT INTO `migrations` VALUES (285, '2023_01_31_114717_create_investment_markets_table', 176);
+INSERT INTO `migrations` VALUES (286, '2023_01_31_115559_add_created_by_to_investment_markets_table', 177);
+INSERT INTO `migrations` VALUES (287, '2023_01_31_130240_add_name_en_to_investment_markers_table', 178);
+INSERT INTO `migrations` VALUES (288, '2023_01_31_134825_create_partner_categories_table', 179);
+INSERT INTO `migrations` VALUES (289, '2023_01_31_135522_add_en_name_to_partner_categories_table', 180);
+INSERT INTO `migrations` VALUES (290, '2023_01_31_145720_create_partner_has_categories_table', 181);
+INSERT INTO `migrations` VALUES (291, '2023_02_04_155535_add_en_name_to_stores_table', 182);
+INSERT INTO `migrations` VALUES (292, '2023_02_04_160813_update_stores_table_v1', 183);
+INSERT INTO `migrations` VALUES (293, '2023_02_25_134939_update_users_table_v1', 184);
+INSERT INTO `migrations` VALUES (294, '2023_02_25_135953_update_users_table_v2', 185);
+INSERT INTO `migrations` VALUES (295, '2023_02_25_152316_update_posts_table_v1', 186);
+INSERT INTO `migrations` VALUES (296, '2023_02_27_164054_update_banners_table_v1', 187);
+INSERT INTO `migrations` VALUES (297, '2023_02_27_164146_update_banners_table_v2', 188);
+INSERT INTO `migrations` VALUES (298, '2023_02_28_055345_update_users_table_v21', 189);
+INSERT INTO `migrations` VALUES (299, '2023_02_28_144828_update_configs_table_v5', 190);
 
 -- ----------------------------
 -- Table structure for model_has_permissions
@@ -2755,6 +2960,7 @@ CREATE TABLE `model_has_roles`  (
 -- ----------------------------
 -- Records of model_has_roles
 -- ----------------------------
+INSERT INTO `model_has_roles` VALUES (4, 'App\\Model\\Common\\User', 1);
 INSERT INTO `model_has_roles` VALUES (3, 'App\\Model\\Common\\User', 15);
 INSERT INTO `model_has_roles` VALUES (4, 'App\\Model\\Common\\User', 15);
 INSERT INTO `model_has_roles` VALUES (3, 'App\\Model\\Common\\User', 16);
@@ -2921,6 +3127,80 @@ INSERT INTO `origins` VALUES (1, 'japan', 'Nhật Bản', 1, 1, '2022-01-16 15:5
 INSERT INTO `origins` VALUES (2, 'usa', 'Mỹ', 1, 1, '2022-01-16 15:50:16', '2022-01-16 15:50:16');
 INSERT INTO `origins` VALUES (3, 'vn', 'Việt Nam', 1, 1, '2022-01-16 15:50:16', '2022-01-16 15:50:16');
 INSERT INTO `origins` VALUES (4, 'cn', 'Trung Quốc', 1, 1, '2022-01-16 15:50:16', '2022-01-16 15:50:16');
+
+-- ----------------------------
+-- Table structure for partner_categories
+-- ----------------------------
+DROP TABLE IF EXISTS `partner_categories`;
+CREATE TABLE `partner_categories`  (
+  `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `slug` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `intro` longtext CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL,
+  `sort_order` int(11) NOT NULL DEFAULT 0,
+  `type` int(11) NOT NULL DEFAULT 1,
+  `parent_id` bigint(20) UNSIGNED NOT NULL DEFAULT 0,
+  `level` int(11) NOT NULL DEFAULT 0,
+  `created_by` bigint(20) UNSIGNED NULL DEFAULT NULL,
+  `updated_by` bigint(20) UNSIGNED NULL DEFAULT NULL,
+  `created_at` timestamp(0) NULL DEFAULT NULL,
+  `updated_at` timestamp(0) NULL DEFAULT NULL,
+  `en_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `partner_categories_created_by_foreign`(`created_by`) USING BTREE,
+  INDEX `partner_categories_updated_by_foreign`(`updated_by`) USING BTREE,
+  CONSTRAINT `partner_categories_created_by_foreign` FOREIGN KEY (`created_by`) REFERENCES `users` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `partner_categories_updated_by_foreign` FOREIGN KEY (`updated_by`) REFERENCES `users` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of partner_categories
+-- ----------------------------
+INSERT INTO `partner_categories` VALUES (2, 'ni', 'ni', '<div>nnn</div>', 0, 1, 0, 0, 1, 1, '2023-01-31 13:57:20', '2023-01-31 13:57:37', 'n');
+INSERT INTO `partner_categories` VALUES (3, 'n', 'n-1', '<div>mn</div>', 0, 1, 0, 0, 1, 1, '2023-01-31 13:57:30', '2023-01-31 13:57:30', 'nm');
+
+-- ----------------------------
+-- Table structure for partner_has_categories
+-- ----------------------------
+DROP TABLE IF EXISTS `partner_has_categories`;
+CREATE TABLE `partner_has_categories`  (
+  `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `partner_id` int(11) NOT NULL,
+  `category_id` int(11) NOT NULL,
+  `created_at` timestamp(0) NULL DEFAULT NULL,
+  `updated_at` timestamp(0) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of partner_has_categories
+-- ----------------------------
+INSERT INTO `partner_has_categories` VALUES (1, 3, 2, NULL, NULL);
+INSERT INTO `partner_has_categories` VALUES (2, 3, 3, NULL, NULL);
+INSERT INTO `partner_has_categories` VALUES (3, 4, 2, NULL, NULL);
+INSERT INTO `partner_has_categories` VALUES (4, 5, 2, NULL, NULL);
+
+-- ----------------------------
+-- Table structure for partners
+-- ----------------------------
+DROP TABLE IF EXISTS `partners`;
+CREATE TABLE `partners`  (
+  `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `code` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `is_show` tinyint(4) NOT NULL DEFAULT 1,
+  `created_at` timestamp(0) NULL DEFAULT NULL,
+  `updated_at` timestamp(0) NULL DEFAULT NULL,
+  `created_by` int(11) NOT NULL,
+  `updated_by` int(11) NOT NULL,
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE INDEX `partners_code_unique`(`code`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of partners
+-- ----------------------------
+INSERT INTO `partners` VALUES (5, 'hh', 'hh', 1, '2023-01-31 15:43:43', '2023-01-31 15:43:43', 1, 1);
 
 -- ----------------------------
 -- Table structure for password_resets
@@ -4444,7 +4724,7 @@ CREATE TABLE `post_categories`  (
   INDEX `post_categories_updated_by_foreign`(`updated_by`) USING BTREE,
   CONSTRAINT `post_categories_created_by_foreign` FOREIGN KEY (`created_by`) REFERENCES `users` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `post_categories_updated_by_foreign` FOREIGN KEY (`updated_by`) REFERENCES `users` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of post_categories
@@ -4501,7 +4781,6 @@ CREATE TABLE `posts`  (
   `status` int(11) NOT NULL DEFAULT 0,
   `cate_id` bigint(20) UNSIGNED NOT NULL,
   `slug` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `language_id` tinyint(4) NOT NULL DEFAULT 1,
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `posts_name_unique`(`name`) USING BTREE,
   INDEX `posts_created_by_foreign`(`created_by`) USING BTREE,
@@ -4510,13 +4789,15 @@ CREATE TABLE `posts`  (
   CONSTRAINT `posts_cate_id_foreign` FOREIGN KEY (`cate_id`) REFERENCES `post_categories` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `posts_created_by_foreign` FOREIGN KEY (`created_by`) REFERENCES `users` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `posts_updated_by_foreign` FOREIGN KEY (`updated_by`) REFERENCES `users` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 56 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of posts
 -- ----------------------------
-INSERT INTO `posts` VALUES (1, 'Khai trường sale 100% sản phẩm', 'ƯU ĐÃI 60% MỪNG KHAI TRƯƠNG SHOWROOM THANHTRI', '<div>\r\n<h1>ƯU Đ&Atilde;I 20% MỪNG KHAI TRƯƠNG SHOWROOM XU&Acirc;N MAI</h1>\r\n</div>\r\n\r\n<div>\r\n<p><strong>Từ 11/01-13/01 tại Xu&acirc;n Mai (Chương Mỹ, H&agrave; Nội), Aristino triển khai chương tr&igrave;nh khai trương showroom mới với h&agrave;ng ng&agrave;n ưu đ&atilde;i hấp dẫn. Nhanh ch&acirc;n gh&eacute; thăm cửa h&agrave;ng để sở hữu những sản phẩm thời trang cao cấp gi&aacute; hời v&agrave; trải nghiệm những ph&uacute;t gi&acirc;y mua sắm th&uacute; vị.</strong></p>\r\n\r\n<p><img data-mce-src=\"//file.hstatic.net/1000199383/file/kt_xuanmai-750x500px_grande.jpg\" data-mce-style=\"display: block; margin-left: auto; margin-right: auto;\" src=\"https://aristino.com/Data/upload/images/News/tin-tuc-aristino/uu-dai-20-mung-khai-truong-showroom-xuan-mai_content_0.jpg\" /></p>\r\n\r\n<p data-mce-style=\"text-align: center;\"><em>Khai trương showroom Aristino tại Xu&acirc;n Mai, Chương Mỹ, H&agrave; Nội</em></p>\r\n\r\n<p><strong>NỘI DUNG ƯU Đ&Atilde;I</strong></p>\r\n\r\n<p><strong><em>SALE OFF 20% to&agrave;n bộ sản phẩm</em></strong></p>\r\n\r\n<p>Kh&aacute;ch h&agrave;ng sẽ nhận được ưu đ&atilde;i giảm gi&aacute; 20% với to&agrave;n bộ sản phẩm tại showroom trong thời gian khai trương.</p>\r\n\r\n<p> <strong><em>Nhận voucher trị gi&aacute; 200.000đ khi mua sắm</em></strong></p>\r\n\r\n<p>Mỗi kh&aacute;ch h&agrave;ng tham gia mua sắm sẽ nhận được voucher trị gi&aacute; 200.000đ &aacute;p dụng cho lần mua sắm tiếp theo với h&oacute;a đơn từ 1.000.000đ trở l&ecirc;n.</p>\r\n\r\n<p> </p>\r\n\r\n<p><img data-mce-src=\"//file.hstatic.net/1000199383/file/kt_xuanmai-1200x798px_grande.jpg\" data-mce-style=\"display: block; margin-left: auto; margin-right: auto;\" src=\"https://aristino.com/Data/upload/images/News/tin-tuc-aristino/uu-dai-20-mung-khai-truong-showroom-xuan-mai_content_1.jpg\" /></p>\r\n\r\n<p data-mce-style=\"text-align: center;\"><em>Giảm gi&aacute; 20% to&agrave;n bộ sản phẩm c&ugrave;ng h&agrave;ng ng&agrave;n voucher c&oacute; gi&aacute; trị</em></p>\r\n\r\n<p>LƯU &Yacute;</p>\r\n\r\n<p>Chương tr&igrave;nh kh&ocirc;ng &aacute;p dụng đồng thời với c&aacute;c chương tr&igrave;nh giảm gi&aacute;, khuyến m&atilde;i kh&aacute;c.</p>\r\n\r\n<p>Aristino sẽ ngừng Sale Off bất cứ khi n&agrave;o HẾT H&Agrave;NG</p>\r\n\r\n<p><strong>ĐỊA CHỈ V&Agrave; THỜI GIAN &Aacute;P DỤNG</strong></p>\r\n\r\n<p> Showroom Aristino số 49, tổ 2, khu Xu&acirc;n H&agrave;, Xu&acirc;n Mai, Chương Mỹ, H&agrave; Nội. (Ng&atilde; tư Xu&acirc;n Mai)</p>\r\n\r\n<p>Thời gian &aacute;p dụng: 11/01/2019 – 13/01/2019</p>\r\n\r\n<p>Thời gian khai trương: 9h00 ng&agrave;y 11/01/2019</p>\r\n\r\n<p data-mce-style=\"text-align: justify;\">Sự ra đời của showroom Xu&acirc;n Mai hứa hẹn mang đến một kh&ocirc;ng gian mua sắm, trải nghiệm ho&agrave;n to&agrave;n mới cho những t&iacute;n đồ thời trang Aristino! Tham khảo ngay th&ocirc;ng tin v&agrave; nhanh ch&acirc;n gh&eacute; showroom để sở hữu sản phẩm thời trang cao cấp với h&agrave;ng ng&agrave;n ưu đ&atilde;i hấp dẫn.</p>\r\n</div>', 1, 1, '2022-02-19 16:03:33', '2022-03-23 14:55:42', 1, 2, 'khai-truong-sale-100-san-pham', 1);
-INSERT INTO `posts` VALUES (4, 'Chọn đồng hồ sao cho hợp phong thủy', 'Nếu bạn là một người quan tâm đến phong thủy và muốn biết mệnh của mình hợp với loại đồng hồ nào thì hãy cùng World Time Seiko tìm hiểu nhé.', '<div>\r\n<p>hổ sinh Kim n&ecirc;n đối với người mệnh Kim, bạn n&ecirc;n chọn kiểu <a href=\"https://seiko-vietnam.com/san-pham.html\" target=\"_blank\" title=\"Xem thêm các mẫu đồng hồ Seiko khác\">đồng hồ Seiko</a> mặt vu&ocirc;ng (h&igrave;nh vu&ocirc;ng đại di&ecirc;n cho yếu tố Thổ), sẽ c&oacute; qu&yacute; nh&acirc;n ph&ugrave; trợ v&agrave; gặp nhiều may mắn. B&ecirc;n cạnh đ&oacute; bạn c&oacute; thể chọn đồng hồ d&acirc;y kim loại (do Kim ch&iacute;nh l&agrave; kim loại) l&agrave; chất liệu đồng h&agrave;nh v&agrave; ph&ugrave; hợp với mệnh của bạn. Ngo&agrave;i ra, người mệnh Kim h&atilde;y chọn đồng hồ mạ v&agrave;ng, m&agrave;u trắng, xanh lam hay đen đều c&oacute; t&aacute;c dụng đem lại may mắn.</p>\r\n\r\n<p><img alt=\"Đồng hồ Seiko màu vàng dành cho những người mệnh kim\" src=\"https://seiko-vietnam.com/data/ck/images/nhung-y-nghia-phong-thuy-cua-dong-ho-ma-khong-phai-ai-cung-biet-2.jpg\" title=\"Đồng hồ Seiko màu vàng dành cho những người mệnh kim\" /></p>\r\n\r\n<div>\r\n<h4><strong>Đối với người mệnh Mộc</strong></h4>\r\n\r\n<p>Nếu bạn thuộc mệnh Mộc, bạn n&ecirc;n chọn những chiếc <a href=\"https://seiko-vietnam.com/san-pham.html\" target=\"_blank\" title=\"Xem thêm các mẫu đồng hồ Seiko khác\">đồng hồ Seiko</a> c&oacute; mặt h&igrave;nh chữ nhật. Về m&agrave;u sắc bạn n&ecirc;n chọn chiếc đồng hồ c&oacute; mặt m&agrave;u xanh dương, xanh lam, xanh da trời, hay m&agrave;u đen hoặc xanh đen – tượng trưng cho h&agrave;nh Thủy – v&igrave; Thủy sinh Mộc.<br />\r\nNgo&agrave;i ra người mệnh Mộc c&ograve;n hợp với đồng hồ m&agrave;u xanh l&aacute; c&acirc;y, đỏ, hồng, t&iacute;m vừa hỗ trợ cho c&ocirc;ng việc, cuộc sống, vừa mang lại sự trẻ trung, tươi mới.</p>\r\n\r\n<p><img alt=\"Đồng hồ Seiko mặt xanh đen hợp với người mệnh mộc\" src=\"https://seiko-vietnam.com/data/ck/images/nhung-y-nghia-phong-thuy-cua-dong-ho-ma-khong-phai-ai-cung-biet-4.jpg\" title=\"Đồng hồ Seiko mặt xanh đen hợp với người mệnh mộc\" /><br />\r\n </p>\r\n\r\n<h4><strong>Đối với người mệnh Thủy</strong></h4>\r\n\r\n<p>H&igrave;nh tr&ograve;n l&agrave; biểu tượng của yếu tố Kim n&ecirc;n người c&oacute; mệnh Thủy đeo <a href=\"https://seiko-vietnam.com/san-pham.html\" target=\"_blank\" title=\"Xem thêm các mẫu đồng hồ Seiko khác\">đồng hồ Seiko</a> kiểu mặt n&agrave;y sẽ nhận được nhiều t&agrave;i lộc do Thủy sinh Kim. Th&ecirc;m nữa, đồng hồ với c&aacute;c m&agrave;u đại diện cho yếu tố Kim như x&aacute;m, bạc hay trắng cũng rất hợp với bạn.</p>\r\n\r\n<p><img alt=\"Đồng hồ Seiko mặt tròn màu bạc dành cho người mệnh Thuỷ\" src=\"https://seiko-vietnam.com/data/ck/images/nhung-y-nghia-phong-thuy-cua-dong-ho-ma-khong-phai-ai-cung-biet-5.jpg\" title=\"Đồng hồ Seiko mặt tròn màu bạc dành cho người mệnh Thuỷ\" /></p>\r\n\r\n<h4><strong>Đối với người mệnh Hỏa</strong></h4>\r\n\r\n<p>Một chiếc đồng hồ m&agrave;u xanh nhẹ nh&agrave;ng sẽ khiến bạn trở n&ecirc;n tươi mới v&agrave; đầy sức sống hơn. V&igrave; mệnh Hỏa của bạn rất hợp với m&agrave;u xanh (Mộc sinh Hỏa).<br />\r\nĐặc biệt, mẫu <a href=\"https://seiko-vietnam.com/san-pham.html\" target=\"_blank\" title=\"Xem thêm các mẫu đồng hồ Seiko khác\">đồng hồ Seiko</a> mặt chữ nhật sẽ hỗ trợ tuyệt vời cho cuộc sống v&agrave; c&ocirc;ng việc của những người mệnh Hỏa.</p>\r\n\r\n<p><img alt=\"Đồng hồ Seiko mặt chữ nhật dành cho người mệnh Hoả\" src=\"https://seiko-vietnam.com/data/ck/images/nhung-y-nghia-phong-thuy-cua-dong-ho-ma-khong-phai-ai-cung-biet-6.jpg\" title=\"Đồng hồ Seiko mặt chữ nhật dành cho người mệnh Hoả\" /></p>\r\n</div>\r\n</div>', 1, 1, '2022-03-02 14:52:36', '2022-05-05 02:10:12', 1, 1, 'chon-dong-ho-sao-cho-hop-phong-thuy', 2);
+INSERT INTO `posts` VALUES (52, 'What to visit in Addis Ababa the capital of Ethiopia', 'There’s a list of best places to visits Addis Ababa that you have to include on your future trip to the city. The capital of Ethiopia, located in the center of the country, has four million people. Even if it might seem chaotic and intimidating, at first sight, Addis Ababa it’s quite safe (in African standards) and has a lot to offer to its visitors. Enjoy a local coffee shop or a restaurant to have your delicious injera.', '<p>There’s a list of <strong>best places to visits Addis Ababa</strong> that you have to include on your future trip to the city. <strong>The capital of Ethiopia</strong>, located in the center of the country, <strong>has four million people</strong>. Even if it <strong>might seem chaotic and intimidating</strong>, at first sight, Addis Ababa it’s quite safe (in African standards) and has a lot to offer to its visitors. Enjoy a local coffee shop or a restaurant to have your delicious <a aria-label=\"injera (opens in a new tab)\" href=\"https://www.joaoleitao.com/injera-ethiopia/\" rel=\"noreferrer noopener\" target=\"_blank\">injera</a>.</p>\r\n\r\n<p><strong>Most of the population in Addis Ababa is Christian</strong>, which generates a wonderful atmosphere. The cultural fusion is intense, with churches side by side with mosques and Christian practices with a local cultural twist.</p>\r\n\r\n<div>\r\n<figure><img alt=\"Visit In Addis Ababa\" decoding=\"async\" loading=\"lazy\" sizes=\"(max-width: 1024px) 100vw, 1024px\" src=\"https://www.joaoleitao.com/wp-content/uploads/2020/04/Visit-Addis-Ababa-1024x768.jpg\" srcset=\"https://www.joaoleitao.com/wp-content/uploads/2020/04/Visit-Addis-Ababa-1024x768.jpg 1024w, https://www.joaoleitao.com/wp-content/uploads/2020/04/Visit-Addis-Ababa-300x225.jpg 300w, https://www.joaoleitao.com/wp-content/uploads/2020/04/Visit-Addis-Ababa-150x113.jpg 150w, https://www.joaoleitao.com/wp-content/uploads/2020/04/Visit-Addis-Ababa-768x576.jpg 768w, https://www.joaoleitao.com/wp-content/uploads/2020/04/Visit-Addis-Ababa.jpg 1341w\" style=\"height:768px; width:1024px\" title=\"What to visit in Addis Ababa the capital of Ethiopia\" />\r\n<figcaption>Visit In Addis Ababa</figcaption>\r\n</figure>\r\n</div>\r\n\r\n<p><strong>The History of Ethiopia</strong> contributes to the fascinating environment of Addis Ababa: we’re at <strong>the capital of the only African country that was never colonized</strong>, even though it was occupied for some time by Italians during the Mussolini period. <strong>In addition to that</strong>, it went through a <strong>communist period</strong> with the support of the Soviet Union and Cuba, which added another historical layer.</p>\r\n\r\n<p><strong>Addis Ababa has excellent museums and fascinating markets</strong>, especially the <a aria-label=\"Merkato (opens in a new tab)\" href=\"https://www.youtube.com/watch?v=7TOimfzHfeE\" rel=\"noreferrer noopener nofollow\" target=\"_blank\">Merkato</a>, which is considered the largest market in the African continent. There are many <a href=\"https://www.joaoleitao.com/visit-ethiopia/\">Historical Places To Visit In Ethiopia</a>, but you do have to spend one of two full days around the capital.</p>\r\n\r\n<p><strong>If you want to visit Addis Ababa</strong> soon, this list of best places will help you organize where to go.</p>', 1, 1, '2023-02-28 16:04:00', '2023-02-28 16:04:00', 1, 1, 'what-to-visit-in-addis-ababa-the-capital-of-ethiopia');
+INSERT INTO `posts` VALUES (53, 'Ben Amera in Mauritania • Remote desert monoliths', 'The mighty void of Sahara Desert reveals interesting facts and fascinating legends. 4 km / 2.4 mi from a little desert village on the railway stretch from Nouadhibou to Zouerate, we can spot an enormous mass of dark rock belonging to Ben Amera monolith, rising up to 633 m / 2076 ft.', '<p><strong>The mighty void of Sahara Desert</strong> reveals interesting facts and fascinating legends. 4 km / 2.4 mi from a little desert village on the railway stretch from Nouadhibou to Zouerate, we can spot an enormous mass of dark rock belonging to Ben Amera monolith, rising up to 633 m / 2076 ft.</p>\r\n\r\n<p><strong>Totally controlling the desert skyline</strong>, Ben Amera is the biggest monolith in <a href=\"https://www.joaoleitao.com/visit-africa/\">Africa</a>. Other smaller size monoliths can be seen nearby.</p>\r\n\r\n<p><strong>To get to Ben Amera</strong>, there is no road. You have to get a 4WD and drive from Nouadhibou to Choum, on a two-day desert adventure.</p>\r\n\r\n<div>\r\n<figure><img alt=\"Map with the location of Ben Amera monolith in Mauritania\" decoding=\"async\" loading=\"lazy\" sizes=\"(max-width: 880px) 100vw, 880px\" src=\"https://www.joaoleitao.com/wp-content/uploads/2015/06/Map-Ben-Amera-Mauritania.jpg\" srcset=\"https://www.joaoleitao.com/wp-content/uploads/2015/06/Map-Ben-Amera-Mauritania.jpg 880w, https://www.joaoleitao.com/wp-content/uploads/2015/06/Map-Ben-Amera-Mauritania-300x200.jpg 300w\" style=\"height:587px; width:880px\" title=\"Ben Amera in Mauritania • Remote desert monoliths\" />\r\n<figcaption>Map with the location of Ben Amera monolith in Mauritania</figcaption>\r\n</figure>\r\n</div>\r\n\r\n<p><strong>A natural monolith is a large block of stone</strong>, consisting of a single element – most times being confused with a mountain. There are only 2 bigger monoliths in the world after Ben Amera, the monolith Uluru and Mount Augustus, both located in Australia.</p>\r\n\r\n<figure>\r\n<ul>\r\n	<li>\r\n	<figure><a data-slb-active=\"1\" data-slb-asset=\"33555721\" data-slb-group=\"7589\" href=\"https://www.joaoleitao.com/wp-content/uploads/2015/06/Ben-Amera-Monolith.jpg\"><img alt=\"On the way to Ben Amera\" data-id=\"7610\" decoding=\"async\" loading=\"lazy\" sizes=\"(max-width: 880px) 100vw, 880px\" src=\"https://www.joaoleitao.com/wp-content/uploads/2015/06/Ben-Amera-Monolith.jpg\" srcset=\"https://www.joaoleitao.com/wp-content/uploads/2015/06/Ben-Amera-Monolith.jpg 880w, https://www.joaoleitao.com/wp-content/uploads/2015/06/Ben-Amera-Monolith-300x200.jpg 300w\" style=\"height:587px; width:880px\" title=\"Ben Amera in Mauritania • Remote desert monoliths\" /></a>\r\n\r\n	<figcaption>On the way to Ben Amera</figcaption>\r\n	</figure>\r\n	</li>\r\n	<li>\r\n	<figure><a data-slb-active=\"1\" data-slb-asset=\"1966048198\" data-slb-group=\"7589\" href=\"https://www.joaoleitao.com/wp-content/uploads/2015/06/Camels-Mauritania.jpg\"><img alt=\"Camels in Mauritania\" data-id=\"7629\" decoding=\"async\" loading=\"lazy\" sizes=\"(max-width: 880px) 100vw, 880px\" src=\"https://www.joaoleitao.com/wp-content/uploads/2015/06/Camels-Mauritania.jpg\" srcset=\"https://www.joaoleitao.com/wp-content/uploads/2015/06/Camels-Mauritania.jpg 880w, https://www.joaoleitao.com/wp-content/uploads/2015/06/Camels-Mauritania-300x200.jpg 300w\" style=\"height:587px; width:880px\" title=\"Ben Amera in Mauritania • Remote desert monoliths\" /></a>\r\n	<figcaption>Camels in Mauritania</figcaption>\r\n	</figure>\r\n	</li>\r\n</ul>\r\n</figure>\r\n\r\n<p><strong>Ben Amera is surrounded by dunes</strong>, and the contrast effect on the landscape is breathtaking.</p>\r\n\r\n<p><strong>Throughout time</strong>, these huge rocks became very useful to sub-Saharan African traders, crossing the desert with camel caravans from Djenee in Mali, all the way to Morocco. When local people set fires, the light reflected on the rock, guiding travelers in the right direction amidst the dark Sahara Desert nights.</p>\r\n\r\n<p><strong>5 km / 3.1 mi away from Ben Amera lies another monolith</strong>. Ben Aicha, the ex-wife of Ben Amera – says local legend. It seems folk stories report that the destiny of those two rocks is the same as of humans.</p>\r\n\r\n<figure>\r\n<ul>\r\n	<li>\r\n	<figure><a data-slb-active=\"1\" data-slb-asset=\"1190925696\" data-slb-group=\"7589\" href=\"https://www.joaoleitao.com/wp-content/uploads/2015/06/Ben-Amera.jpg\"><img alt=\"Ben Amera Monolith\" data-id=\"7618\" decoding=\"async\" loading=\"lazy\" sizes=\"(max-width: 880px) 100vw, 880px\" src=\"https://www.joaoleitao.com/wp-content/uploads/2015/06/Ben-Amera.jpg\" srcset=\"https://www.joaoleitao.com/wp-content/uploads/2015/06/Ben-Amera.jpg 880w, https://www.joaoleitao.com/wp-content/uploads/2015/06/Ben-Amera-300x200.jpg 300w\" style=\"height:587px; width:880px\" title=\"Ben Amera in Mauritania • Remote desert monoliths\" /></a>\r\n\r\n	<figcaption>Ben Amera Monolith</figcaption>\r\n	</figure>\r\n	</li>\r\n	<li>\r\n	<figure><a data-slb-active=\"1\" data-slb-asset=\"483338712\" data-slb-group=\"7589\" href=\"https://www.joaoleitao.com/wp-content/uploads/2015/06/Climbing-Ben-Amera-Monolith.jpg\"><img alt=\"Climbing Ben Amera monolith in Sahara Desert\" data-id=\"7611\" decoding=\"async\" loading=\"lazy\" sizes=\"(max-width: 587px) 100vw, 587px\" src=\"https://www.joaoleitao.com/wp-content/uploads/2015/06/Climbing-Ben-Amera-Monolith.jpg\" srcset=\"https://www.joaoleitao.com/wp-content/uploads/2015/06/Climbing-Ben-Amera-Monolith.jpg 587w, https://www.joaoleitao.com/wp-content/uploads/2015/06/Climbing-Ben-Amera-Monolith-200x300.jpg 200w\" style=\"height:880px; width:587px\" title=\"Ben Amera in Mauritania • Remote desert monoliths\" /></a>\r\n	<figcaption>Climbing Ben Amera monolith in Sahara Desert</figcaption>\r\n	</figure>\r\n	</li>\r\n	<li>\r\n	<figure><a data-slb-active=\"1\" data-slb-asset=\"1738804864\" data-slb-group=\"7589\" href=\"https://www.joaoleitao.com/wp-content/uploads/2015/06/Danger-Mines-Desert-Maurita.jpg\"><img alt=\"Land mines sign in the desert\" data-id=\"7612\" decoding=\"async\" loading=\"lazy\" sizes=\"(max-width: 587px) 100vw, 587px\" src=\"https://www.joaoleitao.com/wp-content/uploads/2015/06/Danger-Mines-Desert-Maurita.jpg\" srcset=\"https://www.joaoleitao.com/wp-content/uploads/2015/06/Danger-Mines-Desert-Maurita.jpg 587w, https://www.joaoleitao.com/wp-content/uploads/2015/06/Danger-Mines-Desert-Maurita-200x300.jpg 200w\" style=\"height:880px; width:587px\" title=\"Ben Amera in Mauritania • Remote desert monoliths\" /></a>\r\n	<figcaption>Land mines sign in the desert</figcaption>\r\n	</figure>\r\n	</li>\r\n</ul>\r\n</figure>\r\n\r\n<p><strong>Legend says that</strong>, at the beginning of times, Ben Amara – the monolith, was married to one of his relatives, Aicha. These two monoliths were once a single block of stone.</p>\r\n\r\n<p><strong>When returning from a trip</strong>, Ben Amera surprised Ben Aicha in the arms of her lover. Enraged, he kicked her away – keeping their siblings close to him. So, today, you’ll see two small stone blocks alongside the imposing Ben Amera monolith. Ben Aicha is left alone with her maid, condemned to observe from afar her angry ex-husband.</p>\r\n\r\n<p><strong>I got to Ben Amera coming from Nouadhibou</strong> on the Atlantic Coast. It took me almost two days to get there, driving in the desert along the railway through the unstable region of the borderline between Morocco and Mauritania.</p>\r\n\r\n<p><strong>During two days we just came across one village</strong> called Tmeimichat; all the rest was desert, sand dunes, camel herds and minefields all along the northern part of the railway.</p>', 1, 1, '2023-02-28 16:13:52', '2023-02-28 16:13:52', 1, 1, 'ben-amera-in-mauritania-remote-desert-monoliths');
+INSERT INTO `posts` VALUES (54, 'Most beautiful places to visit in Venice – Italy', 'Venice, in the north of Italy, is one of the most famous and most visited places in the world. After a remarkable growth that started in the 10th century and spread the influence of Venice across the coasts of the Mediterranean, the beginning of Venice’s decline started in the 15th century pressured by the Ottoman Empire that began to influence areas that were once dominated by Italy.', '<p>Venice, in the north of Italy, is one of the most famous and most visited places in the world. After a remarkable growth that started in the 10th century and spread the influence of Venice across the coasts of the Mediterranean, the beginning of Venice’s decline started in the 15th century pressured by the Ottoman Empire that began to influence areas that were once dominated by Italy.</p>\r\n\r\n<p>In the following centuries, though, the power of Venice remained strong and the environment of the city still populates our imaginations, with stories of mystery and intrigue, masquerade balls, and traveling around in its intricate network of canals.</p>\r\n\r\n<div>\r\n<figure><img alt=\"Venetian Carnival Mask\" decoding=\"async\" loading=\"lazy\" sizes=\"(max-width: 880px) 100vw, 880px\" src=\"https://www.joaoleitao.com/wp-content/uploads/2015/01/Mask-Carnival-Venice.jpg\" srcset=\"https://www.joaoleitao.com/wp-content/uploads/2015/01/Mask-Carnival-Venice.jpg 880w, https://www.joaoleitao.com/wp-content/uploads/2015/01/Mask-Carnival-Venice-300x200.jpg 300w\" style=\"height:587px; width:880px\" title=\"Most beautiful places to visit in Venice – Italy\" />\r\n<figcaption>Interesting Venetian Carnival mask</figcaption>\r\n</figure>\r\n</div>\r\n\r\n<p>The atmosphere of opulence and charm remain the same today. In addition to the vast artistic and architectural heritage, the magic of the city increases because it’s unusually built on water. The water is also causing concern because of rising levels and the age of the structures the city is built on.</p>\r\n\r\n<p>Venice is incredibly relevant historically, especially when you think of the area around the famous Piazza San Marco (St. Mark’s Square). It’s only natural that the city became a UNESCO World Heritage Site in 1987.</p>\r\n\r\n<h2>Why to visit Venice?</h2>\r\n\r\n<div>\r\n<figure><img alt=\"Gondolas by night\" decoding=\"async\" loading=\"lazy\" sizes=\"(max-width: 880px) 100vw, 880px\" src=\"https://www.joaoleitao.com/wp-content/uploads/2015/01/Venice-by-Night.jpg\" srcset=\"https://www.joaoleitao.com/wp-content/uploads/2015/01/Venice-by-Night.jpg 880w, https://www.joaoleitao.com/wp-content/uploads/2015/01/Venice-by-Night-300x200.jpg 300w\" style=\"height:587px; width:880px\" title=\"Most beautiful places to visit in Venice – Italy\" />\r\n<figcaption>Gondolas by night</figcaption>\r\n</figure>\r\n</div>\r\n\r\n<p>Venice is a place that almost doesn’t need any words to describe it.</p>\r\n\r\n<p>It’s famous, historical, culturally on, memorable, outstanding.</p>\r\n\r\n<p>Getting the opportunity to visit Venice comes out to be one of the nicest experiences a traveler might have.</p>\r\n\r\n<p>Either visiting its palaces, exploring the museums, wandering along its old streets, discovering small alleys, crossing the countless picturesque bridges, taking a serenaded gondola ride on the canals, food and wine tasting, or just enjoying the romantic atmosphere, well, Venice will definitely keep you busy for a few days.</p>', 1, 1, '2023-02-28 16:47:11', '2023-02-28 16:47:11', 1, 1, 'most-beautiful-places-to-visit-in-venice-italy');
+INSERT INTO `posts` VALUES (55, 'Amazing Alentejo – Cycling in Portugal – Bicycle diaries', 'I love riding a bicycle. Portugal is a beautiful country and has many good countryside roads where you can calmly ride a bicycle.', '<div>\r\n<p>I love riding a bicycle. Portugal is a beautiful country and has many good countryside roads where you can calmly ride a bicycle.</p>\r\n\r\n<p>Although I never went on big trips on a two-wheel vehicle, I had the opportunity to explore <a href=\"https://www.joaoleitao.com/visit-alentejo-portugal/\">Alentejo</a> on a bike.</p>\r\n\r\n<div>\r\n<figure><img alt=\" Gorgeous landscape in Alentejo in Portugal \" decoding=\"async\" loading=\"lazy\" sizes=\"(max-width: 880px) 100vw, 880px\" src=\"https://www.joaoleitao.com/wp-content/uploads/2019/05/Alentejo-Portugal.jpg\" srcset=\"https://www.joaoleitao.com/wp-content/uploads/2019/05/Alentejo-Portugal.jpg 880w, https://www.joaoleitao.com/wp-content/uploads/2019/05/Alentejo-Portugal-150x100.jpg 150w, https://www.joaoleitao.com/wp-content/uploads/2019/05/Alentejo-Portugal-300x200.jpg 300w, https://www.joaoleitao.com/wp-content/uploads/2019/05/Alentejo-Portugal-768x512.jpg 768w\" style=\"height:587px; width:880px\" title=\"Amazing Alentejo - Cycling in Portugal - Bicycle diaries\" />\r\n<figcaption>Gorgeous Alentejo landscape in Portugal</figcaption>\r\n</figure>\r\n</div>\r\n\r\n<p>I’m sharing with you two of the most remarkable trips of cycling in Portugal that I had the chance to venture myself.</p>\r\n\r\n<p>If you’re up to some cycling holidays in Portugal, I’m sure this page will inspire you to go on the road and explore Portugal by bicycle.</p>\r\n</div>', 1, 1, '2023-02-28 16:48:00', '2023-02-28 16:48:00', 1, 1, 'amazing-alentejo-cycling-in-portugal-bicycle-diaries');
 
 -- ----------------------------
 -- Table structure for print_templates
@@ -4813,6 +5094,77 @@ INSERT INTO `products` VALUES (23, 'EDIFICE CASIO 51.6 mm Nam EFR-303L-1AVUDF', 
 INSERT INTO `products` VALUES (25, 'Thzxkjkxz', 1, 1, 1, '2022-04-04 10:54:52', '2022-04-12 16:29:46', 2222, 11, NULL, NULL, NULL, 'thzxkjkxz', NULL, 7, 1, 'sd', 'ddddddddddđ', NULL, 0, 1, 2);
 
 -- ----------------------------
+-- Table structure for project_categories
+-- ----------------------------
+DROP TABLE IF EXISTS `project_categories`;
+CREATE TABLE `project_categories`  (
+  `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `slug` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `intro` longtext CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL,
+  `sort_order` int(11) NOT NULL DEFAULT 0,
+  `type` int(11) NOT NULL DEFAULT 1,
+  `parent_id` bigint(20) UNSIGNED NOT NULL DEFAULT 0,
+  `level` int(11) NOT NULL DEFAULT 0,
+  `created_by` bigint(20) UNSIGNED NULL DEFAULT NULL,
+  `updated_by` bigint(20) UNSIGNED NULL DEFAULT NULL,
+  `created_at` timestamp(0) NULL DEFAULT NULL,
+  `updated_at` timestamp(0) NULL DEFAULT NULL,
+  `en_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `project_categories_created_by_foreign`(`created_by`) USING BTREE,
+  INDEX `project_categories_updated_by_foreign`(`updated_by`) USING BTREE,
+  CONSTRAINT `project_categories_created_by_foreign` FOREIGN KEY (`created_by`) REFERENCES `users` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `project_categories_updated_by_foreign` FOREIGN KEY (`updated_by`) REFERENCES `users` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of project_categories
+-- ----------------------------
+INSERT INTO `project_categories` VALUES (1, 'Năng Lương Xanh', 'nang-luong-xanh', NULL, 0, 1, 0, 0, 1, 1, '2022-10-26 11:31:36', '2022-10-26 11:56:51', 'ji');
+INSERT INTO `project_categories` VALUES (2, 'Năng lượng hơi xanh', 'nang-luong-hoi-xanh', NULL, 0, 1, 0, 0, 1, 1, '2022-10-26 14:42:03', '2022-10-26 14:42:03', 'fdfđfdfdffdfdfdf');
+INSERT INTO `project_categories` VALUES (3, 'nnn', 'nnn', '<div>nnnn</div>', 0, 1, 0, 0, 1, 1, '2023-01-31 13:53:24', '2023-01-31 13:53:24', 'nnn');
+
+-- ----------------------------
+-- Table structure for project_languages
+-- ----------------------------
+DROP TABLE IF EXISTS `project_languages`;
+CREATE TABLE `project_languages`  (
+  `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `project_id` int(11) NOT NULL,
+  `language` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `title` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `address` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL,
+  `short_des` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `des` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `created_at` timestamp(0) NULL DEFAULT NULL,
+  `updated_at` timestamp(0) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of project_languages
+-- ----------------------------
+INSERT INTO `project_languages` VALUES (1, 1, 'vi', 'dự án 1', 'hhgh', '<div>ghhghghghghghg</div>', '<div>tyyyyyyyy</div>', '2022-10-26 13:50:54', '2022-10-26 13:50:54');
+INSERT INTO `project_languages` VALUES (2, 1, 'en', 'dứ án 2', 't', '<div>gghg</div>', '<div>t5</div>', '2022-10-26 13:50:54', '2022-10-26 13:50:54');
+INSERT INTO `project_languages` VALUES (3, 2, 'vi', 'gbghghg', 'hg', '<div>hggh</div>', '<div>hgh</div>', '2022-10-26 14:42:53', '2022-10-26 14:42:53');
+INSERT INTO `project_languages` VALUES (4, 2, 'en', 'ht', 'ty', '<div>t</div>', '<div>ytyt</div>', '2022-10-26 14:42:53', '2022-10-26 14:42:53');
+
+-- ----------------------------
+-- Table structure for projects
+-- ----------------------------
+DROP TABLE IF EXISTS `projects`;
+CREATE TABLE `projects`  (
+  `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `created_by` int(11) NOT NULL,
+  `updated_by` int(11) NOT NULL,
+  `created_at` timestamp(0) NULL DEFAULT NULL,
+  `updated_at` timestamp(0) NULL DEFAULT NULL,
+  `category_id` int(11) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
 -- Table structure for promo_campaign_checkpoint_products
 -- ----------------------------
 DROP TABLE IF EXISTS `promo_campaign_checkpoint_products`;
@@ -5048,6 +5400,68 @@ CREATE TABLE `receipt_vouchers`  (
 INSERT INTO `receipt_vouchers` VALUES (37, 'PTT.000037', 50000.00, '2021-06-22 09:18:00', 1, 1, NULL, 1, 49, 'App\\Model\\Common\\Customer', 27, 'Dương Trọng Hoàng', 2, 2, 4, '2021-06-22 18:18:38', '2021-06-22 18:18:38', 1, 27);
 INSERT INTO `receipt_vouchers` VALUES (38, 'PTT.000038', 90000.00, '2021-06-23 08:21:00', 1, 1, NULL, 1, 50, 'App\\Model\\Common\\Customer', 27, 'Dương Trọng Hoàng', 5, 5, 3, '2021-06-23 17:21:52', '2021-06-23 17:21:52', 1, 27);
 INSERT INTO `receipt_vouchers` VALUES (39, 'PTT.000039', 0.00, '2021-07-07 20:34:00', 1, 1, NULL, 1, 49, 'App\\Model\\Common\\Customer', 27, 'Dương Trọng Hoàng', 2, 2, 4, '2021-07-07 20:34:21', '2021-07-07 20:34:21', 1, 27);
+
+-- ----------------------------
+-- Table structure for regent
+-- ----------------------------
+DROP TABLE IF EXISTS `regent`;
+CREATE TABLE `regent`  (
+  `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `phone_number` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `sex` tinyint(4) NOT NULL,
+  `email` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL,
+  `date_of_birth` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL,
+  `created_by` int(11) NOT NULL,
+  `updated_by` int(11) NOT NULL,
+  `created_at` timestamp(0) NULL DEFAULT NULL,
+  `updated_at` timestamp(0) NULL DEFAULT NULL,
+  `sort_order` tinyint(4) NOT NULL DEFAULT 1,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for regent_experience
+-- ----------------------------
+DROP TABLE IF EXISTS `regent_experience`;
+CREATE TABLE `regent_experience`  (
+  `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `regent_language_id` int(11) NOT NULL,
+  `content` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `created_at` timestamp(0) NULL DEFAULT NULL,
+  `updated_at` timestamp(0) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 17 CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of regent_experience
+-- ----------------------------
+INSERT INTO `regent_experience` VALUES (13, 3, '6/2020 to present: Founding and operating RT Energy PTE LTD-Singapore', '2022-12-05 10:46:28', '2022-12-05 10:46:28');
+INSERT INTO `regent_experience` VALUES (14, 3, '8/2019-5/2020: Founding shareholder, senior advisor Indefol Solar', '2022-12-05 10:46:28', '2022-12-05 10:46:28');
+INSERT INTO `regent_experience` VALUES (15, 15, 'sccx c', '2022-12-05 10:46:28', '2022-12-05 10:46:28');
+INSERT INTO `regent_experience` VALUES (16, 15, 'fdfdfd', '2022-12-05 10:46:28', '2022-12-05 10:46:28');
+
+-- ----------------------------
+-- Table structure for regent_language
+-- ----------------------------
+DROP TABLE IF EXISTS `regent_language`;
+CREATE TABLE `regent_language`  (
+  `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `regent_id` int(11) NOT NULL,
+  `language` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `full_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `address` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL,
+  `role` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `description` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `created_at` timestamp(0) NULL DEFAULT NULL,
+  `updated_at` timestamp(0) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 16 CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of regent_language
+-- ----------------------------
+INSERT INTO `regent_language` VALUES (3, 3, 'vi', 'Nguyen Van Thang', NULL, 'fvc d  sd', '<div>Tiếng  việt szc x During nearly 20 years of working, Mr. Saumya Swain has held many important positions in business management at real estate and technology companies in Korea and many countries around the world. In particular, w</div>', '2022-12-05 10:40:57', '2022-12-05 10:40:57');
+INSERT INTO `regent_language` VALUES (15, 3, 'en', 'VanPersi', NULL, 'dsdsdsds', '<div>During nearly 20 years of working, Mr. Saumya Swain has held many important positions in business management at real estate and technology companies in Korea and many countries around the world. In particular, w</div>', '2022-12-05 10:46:28', '2022-12-05 10:46:28');
 
 -- ----------------------------
 -- Table structure for reviews
@@ -5325,9 +5739,9 @@ CREATE TABLE `stocks`  (
 DROP TABLE IF EXISTS `stores`;
 CREATE TABLE `stores`  (
   `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `province_id` int(11) NOT NULL,
-  `lat` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  `long` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `province_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL,
+  `lat` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL,
+  `long` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL,
   `address` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `des` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL,
   `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
@@ -5337,18 +5751,24 @@ CREATE TABLE `stores`  (
   `updated_by` int(11) NOT NULL,
   `created_at` timestamp(0) NULL DEFAULT NULL,
   `updated_at` timestamp(0) NULL DEFAULT NULL,
+  `email` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL,
+  `en_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL,
+  `en_phone` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL,
+  `en_hotline` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL,
+  `en_email` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL,
+  `en_address` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of stores
 -- ----------------------------
-INSERT INTO `stores` VALUES (1, 1, '21.02257087439612', '105.84216949955034', 'thanh trì hà nội', NULL, 'Showroom Kén nhỏ', '099090088', '099090088', 1, 1, '2022-01-07 08:52:05', '2022-03-10 20:20:34');
-INSERT INTO `stores` VALUES (2, 1, '20.97996038846229', '105.85875770277889', '222 hà nội', NULL, 'Showroom Sâu xanh', '09808909', '0990890899', 1, 1, '2022-01-07 10:11:24', '2022-01-07 11:55:03');
-INSERT INTO `stores` VALUES (3, 1, '21.006870176435015', '105.86221552924053', 'ha nội', NULL, 'Showroom Gấu xám', '76554', '4333443', 1, 1, '2022-01-07 11:56:40', '2022-01-07 11:56:40');
-INSERT INTO `stores` VALUES (4, 1, '21.009263037447496', '105.75952563196839', 'hà nôi', NULL, 'Showroom Nhím xù', '454556756', '7eterter', 1, 1, '2022-01-07 11:57:37', '2022-01-07 11:57:37');
-INSERT INTO `stores` VALUES (5, 22, '21.01247245074024', '105.77001425905397', 'hcm', NULL, 'Showroom Sóc nâu', '33232', '3232', 1, 1, '2022-01-07 11:58:07', '2022-01-07 11:58:07');
-INSERT INTO `stores` VALUES (6, 22, '21.0133671533394', '105.77986750513733', 'ha noi', NULL, 'Showroom Cánh én', '3223', '323232', 1, 1, '2022-01-07 11:58:33', '2022-01-07 11:58:33');
+INSERT INTO `stores` VALUES (1, '1', '21.02257087439612', '105.84216949955034', 'thanh trì hà nội', NULL, 'Showroom Kén nhỏ', '099090088', '099090088', 1, 1, '2022-01-07 08:52:05', '2022-03-10 20:20:34', NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `stores` VALUES (2, '1', NULL, NULL, '222 hà nội', NULL, 'Showroom Sâu xanh', '09808909', '0990890899', 1, 1, '2022-01-07 10:11:24', '2023-02-04 16:22:57', 'bvbvbvbv', 'gggh', 'bvbv', 'bvbvbvbv', 'bvbv', 'fvbv');
+INSERT INTO `stores` VALUES (3, '1', '21.006870176435015', '105.86221552924053', 'ha nội', NULL, 'Showroom Gấu xám', '76554', '4333443', 1, 1, '2022-01-07 11:56:40', '2022-01-07 11:56:40', NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `stores` VALUES (4, '1', '21.009263037447496', '105.75952563196839', 'hà nôi', NULL, 'Showroom Nhím xù', '454556756', '7eterter', 1, 1, '2022-01-07 11:57:37', '2022-01-07 11:57:37', NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `stores` VALUES (5, '22', '21.01247245074024', '105.77001425905397', 'hcm', NULL, 'Showroom Sóc nâu', '33232', '3232', 1, 1, '2022-01-07 11:58:07', '2022-01-07 11:58:07', NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `stores` VALUES (6, '22', NULL, NULL, 'ha noi', NULL, 'Showroom Cánh én', '3223', '323232', 1, 1, '2022-01-07 11:58:33', '2023-02-04 16:11:48', 'dsdsdssd', 'sxcxcxcxc', '66556565', '676767', 'ghghgh', 'xcxcxc');
 
 -- ----------------------------
 -- Table structure for suppliers
@@ -5511,6 +5931,15 @@ CREATE TABLE `users`  (
   `avatar` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `created_by` bigint(20) UNSIGNED NULL DEFAULT NULL,
   `updated_by` bigint(20) UNSIGNED NULL DEFAULT NULL,
+  `birthday` date NULL DEFAULT NULL,
+  `nation` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `address` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `phone` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `skype` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `facebook` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `is_main` tinyint(4) NULL DEFAULT NULL,
+  `surname` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `lastname` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `users_email_unique`(`email`) USING BTREE,
   INDEX `users_created_by_foreign`(`created_by`) USING BTREE,
@@ -5522,13 +5951,13 @@ CREATE TABLE `users`  (
 -- ----------------------------
 -- Records of users
 -- ----------------------------
-INSERT INTO `users` VALUES (1, 'admin', 'admin@gmail.com', NULL, '$2y$10$IRlIqMGo4c212ruRyHrVQusD3vycEv32MuUq5KDn67PKZyOMjQ4fu', 'Frr3f3gNKH8vxlpnZdC1FW23vm8yPRcHKFI5k6nGLLhQrtbBJriSusxNuf6V', '2021-03-29 20:15:26', '2021-03-29 20:15:30', 1, 1, NULL, NULL, 1);
-INSERT INTO `users` VALUES (2, 'g7admin', 'adming7@gmail.com', NULL, '$2y$10$ND/0YaztA/SGS5zALJyTz./EEBWUDIjIKNfaxnJA6JCKfuPUWlOvS', 'mbBC4Uh549waW3MszlRSk4VfyCoUwPU1MZsAXbHpHgy2iwQh2eLvbWuA5ZGr', '2021-04-23 23:31:21', '2021-07-10 09:14:29', 3, 1, NULL, NULL, 2);
-INSERT INTO `users` VALUES (3, 'Nguyễn Đăng Khoa', 'dangkhoa@gmail.com', NULL, '$2y$10$UkGV5H5QCJHWT92NXwu8K.qnWX5iaeEW2HHDsSg255UDiDVjHw5l6', NULL, '2021-06-11 08:24:14', '2021-06-11 20:47:37', 5, 1, NULL, 2, 2);
-INSERT INTO `users` VALUES (5, 'Trần Văn Hoàng', 'adminvy@gmail.com', NULL, '$2y$10$2lM94CQbtwxFJtZn0Wm..eNr30nwuvKFH6MA/dspXbvm4qDLsahPG', 'kByyXCenngMwJc6v7rfyLKgRTCEocx2LkX2gkfbLTmxfBXlDtdarRAIKhE6n', '2021-06-22 17:28:26', '2021-06-22 17:28:26', 3, 1, NULL, 1, 5);
-INSERT INTO `users` VALUES (14, 'test nhóm G7 2', 'nhomg7test2@gmail.com', NULL, '$2y$10$32MicDZPzD980ZZkhM29XuMoGKgVjGJXtPLYfeGzaWGMlKyRHV9zu', NULL, '2021-07-09 10:35:31', '2021-07-15 11:02:30', 4, 0, NULL, 1, 1);
-INSERT INTO `users` VALUES (15, 'Hoàng', 'g7vinhyen@gmail.com', NULL, '$2y$10$OVV2iWN4eTPaGyS29OgNmeqNEfoNYxYcCOhmhwTVRwko7Heopxa0q', 'OYQErpIA1MsqOUp5Fpjp2aHLzSIjGjcE3pUkCCOt91h9bVfVvCbWvRkTMOqY', '2021-07-10 08:06:48', '2021-07-15 11:02:15', 3, 0, NULL, 1, 1);
-INSERT INTO `users` VALUES (16, 'Đăng Khoa', 'thangnguyennvt1410@gmail.com', NULL, '$2y$10$XZmD8N.QONOpYJhtWpCFvOKNBV6qFlJPADjkMPEDGueH7F75PBt8u', NULL, '2021-07-29 21:44:04', '2021-07-29 22:27:25', 2, 1, NULL, 1, 1);
+INSERT INTO `users` VALUES (1, 'admin joinh', 'admin@gmail.com', NULL, '$2y$10$IRlIqMGo4c212ruRyHrVQusD3vycEv32MuUq5KDn67PKZyOMjQ4fu', 'Frr3f3gNKH8vxlpnZdC1FW23vm8yPRcHKFI5k6nGLLhQrtbBJriSusxNuf6V', '2021-03-29 20:15:26', '2023-02-28 06:01:26', 2, 1, NULL, NULL, 1, '2023-02-25', 'cxcxcxcx', 'cxcxxc', 'cxcx', 'xccx', 'cxcc', 1, 'admin', 'joinh');
+INSERT INTO `users` VALUES (2, 'g7admin', 'adming7@gmail.com', NULL, '$2y$10$ND/0YaztA/SGS5zALJyTz./EEBWUDIjIKNfaxnJA6JCKfuPUWlOvS', 'mbBC4Uh549waW3MszlRSk4VfyCoUwPU1MZsAXbHpHgy2iwQh2eLvbWuA5ZGr', '2021-04-23 23:31:21', '2023-02-25 14:21:00', 3, 1, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, 0, '', '');
+INSERT INTO `users` VALUES (3, 'Nguyễn Đăng Khoa', 'dangkhoa@gmail.com', NULL, '$2y$10$UkGV5H5QCJHWT92NXwu8K.qnWX5iaeEW2HHDsSg255UDiDVjHw5l6', NULL, '2021-06-11 08:24:14', '2023-02-25 14:21:00', 5, 1, NULL, 2, 2, NULL, NULL, NULL, NULL, NULL, NULL, 0, '', '');
+INSERT INTO `users` VALUES (5, 'Trần Văn Hoàng', 'adminvy@gmail.com', NULL, '$2y$10$2lM94CQbtwxFJtZn0Wm..eNr30nwuvKFH6MA/dspXbvm4qDLsahPG', 'kByyXCenngMwJc6v7rfyLKgRTCEocx2LkX2gkfbLTmxfBXlDtdarRAIKhE6n', '2021-06-22 17:28:26', '2023-02-25 14:21:00', 3, 1, NULL, 1, 5, NULL, NULL, NULL, NULL, NULL, NULL, 0, '', '');
+INSERT INTO `users` VALUES (14, 'test nhóm G7 2', 'nhomg7test2@gmail.com', NULL, '$2y$10$32MicDZPzD980ZZkhM29XuMoGKgVjGJXtPLYfeGzaWGMlKyRHV9zu', NULL, '2021-07-09 10:35:31', '2023-02-25 14:21:00', 4, 0, NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, 0, '', '');
+INSERT INTO `users` VALUES (15, 'Hoàng', 'g7vinhyen@gmail.com', NULL, '$2y$10$OVV2iWN4eTPaGyS29OgNmeqNEfoNYxYcCOhmhwTVRwko7Heopxa0q', 'OYQErpIA1MsqOUp5Fpjp2aHLzSIjGjcE3pUkCCOt91h9bVfVvCbWvRkTMOqY', '2021-07-10 08:06:48', '2023-02-25 14:21:00', 3, 0, NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, 0, '', '');
+INSERT INTO `users` VALUES (16, 'Đăng Khoa', 'thangnguyennvt1410@gmail.com', NULL, '$2y$10$XZmD8N.QONOpYJhtWpCFvOKNBV6qFlJPADjkMPEDGueH7F75PBt8u', NULL, '2021-07-29 21:44:04', '2023-02-25 14:21:00', 2, 1, NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, 0, '', '');
 
 -- ----------------------------
 -- Table structure for vehicle_categories
