@@ -37,33 +37,34 @@ class DashboardController extends Controller
 								->sum('price');
 
 		// Google Analytics
-		
-		$data_analytics['active'] = Analytics::getAnalyticsService()->data_realtime->get('ga:'.env('ANALYTICS_VIEW_ID'), 'rt:activeVisitors')->totalsForAllResults['rt:activeVisitors'];
-		$data_analytics['total_page_views'] = Analytics::fetchTotalVisitorsAndPageViews(Period::days(10));
-		$data_analytics['today'] = Analytics::fetchTotalVisitorsAndPageViews(Period::days(0));
 
-		$data_analytics['top_visited_pages'] = Analytics::fetchMostVisitedPages(Period::days(7), 6);
-
-		$data_analytics['devices'] = GoogleAnalytics::fetchDeviceVisitors(Period::days(29));
-		$data_analytics['organic_search'] = GoogleAnalytics::fetchOrganicSearch(Period::days(29));
-		$data_analytics['month_visitor'] = Analytics::fetchTotalVisitorsAndPageViews(Period::days(30));
-		$data_analytics['month_visitor'] = $data_analytics['month_visitor']->sum('visitors');
-
-		$startDate =  \Carbon\Carbon::now()->startOfMonth();
-		$endDate = new \Carbon\Carbon('now');
-
-		if($startDate == $endDate) {
-			$data_analytics['month_visitors'] = Analytics::fetchTotalVisitorsAndPageViews(Period::day(0));
-		} else {
-			$data_analytics['month_visitors'] = Analytics::fetchTotalVisitorsAndPageViews(Period::create($startDate, $endDate));
-		}
-		$data_analytics['month_visitors'] = $data_analytics['month_visitors']->sum('visitors');
-
-		// dd($data_analytics);
-		$sales = $this->getOrderByDay();
+//		$data_analytics['active'] = Analytics::getAnalyticsService()->data_realtime->get('ga:'.env('ANALYTICS_VIEW_ID'), 'rt:activeVisitors')->totalsForAllResults['rt:activeVisitors'];
+//		$data_analytics['total_page_views'] = Analytics::fetchTotalVisitorsAndPageViews(Period::days(10));
+//		$data_analytics['today'] = Analytics::fetchTotalVisitorsAndPageViews(Period::days(0));
+//
+//		$data_analytics['top_visited_pages'] = Analytics::fetchMostVisitedPages(Period::days(7), 6);
+//
+//		$data_analytics['devices'] = GoogleAnalytics::fetchDeviceVisitors(Period::days(29));
+//		$data_analytics['organic_search'] = GoogleAnalytics::fetchOrganicSearch(Period::days(29));
+//		$data_analytics['month_visitor'] = Analytics::fetchTotalVisitorsAndPageViews(Period::days(30));
+//		$data_analytics['month_visitor'] = $data_analytics['month_visitor']->sum('visitors');
+//
+//		$startDate =  \Carbon\Carbon::now()->startOfMonth();
+//		$endDate = new \Carbon\Carbon('now');
+//
+//		if($startDate == $endDate) {
+//			$data_analytics['month_visitors'] = Analytics::fetchTotalVisitorsAndPageViews(Period::day(0));
+//		} else {
+//			$data_analytics['month_visitors'] = Analytics::fetchTotalVisitorsAndPageViews(Period::create($startDate, $endDate));
+//		}
+//		$data_analytics['month_visitors'] = $data_analytics['month_visitors']->sum('visitors');
+//
+//		// dd($data_analytics);
+//		$sales = $this->getOrderByDay();
 		// dd($sales);
 
-		return view($this->view.'.dash', compact('data','data_analytics','sales'));
+//		return view($this->view.'.dash', compact('data','data_analytics','sales'));
+		return view($this->view.'.dash', compact('data'));
 	}
 
 	public function getOrderByDay()

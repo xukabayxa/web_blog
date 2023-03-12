@@ -16,55 +16,70 @@ Admin Panel - {{ $config->web_title }}
 <div class="row">
     <div class="col-lg-3 col-6">
         <!-- small box -->
-        <div class="small-box bg-info">
-            <div class="inner">
-                <h3 style="color: #F58220">{{ $data['orders'] }}</h3>
-                <p>Tổng số đơn trong ngày</p>
-            </div>
-            <div class="icon">
-                <i class="fas fa-file-invoice"></i>
-            </div>
-        </div>
-    </div>
-    <!-- ./col -->
-    <div class="col-lg-3 col-6">
-        <!-- small box -->
-        <div class="small-box bg-success">
-            <div class="inner">
-                <h3 style="color: #F58220">{{ formatCurrent($data['total_price']) }}</h3>
-                <p>Giá trị đặt hàng trong ngày</p>
-            </div>
-            <div class="icon">
-                <i class="fas fa-file-invoice-dollar"></i>
-            </div>
-        </div>
-    </div>
-    <!-- ./col -->
-    <div class="col-lg-3 col-6">
-        <!-- small box -->
         <div class="small-box bg-warning">
             <div class="inner">
-                <h3 style="color: #F58220">{{ $data_analytics['active'] }}</h3>
-                <p>Khách đang online</p>
+{{--                <h3 style="color: #F58220">{{ $data_analytics['active'] }}</h3>--}}
+                <h3 style="color: #F58220">0</h3>
+                <p>Users đang online</p>
             </div>
             <div class="icon">
                 <i class="fas fa-user"></i>
             </div>
         </div>
     </div>
+
+    <div class="col-lg-3 col-6">
+        <!-- small box -->
+        <div class="small-box bg-info">
+{{--            <div class="inner">--}}
+{{--                <h3 style="color: #F58220">{{ $data['orders'] }}</h3>--}}
+{{--                <p>Tổng số đơn trong ngày</p>--}}
+{{--            </div>--}}
+{{--            <div class="icon">--}}
+{{--                <i class="fas fa-file-invoice"></i>--}}
+{{--            </div>--}}
+        </div>
+    </div>
     <!-- ./col -->
     <div class="col-lg-3 col-6">
         <!-- small box -->
-        <div class="small-box bg-danger">
-            <div class="inner">
-                <h3 style="color: #F58220">{{ isset($data_analytics['today']) ? $data_analytics['today'][0]['visitors'] : 0 }}</h3>
-                <p> Khách trong ngày </p>
-            </div>
-            <div class="icon">
-                <i class="fas fa-users"></i>
-            </div>
-        </div>
+{{--        <div class="small-box bg-success">--}}
+{{--            <div class="inner">--}}
+{{--                <h3 style="color: #F58220">{{ formatCurrent($data['total_price']) }}</h3>--}}
+{{--                <p>Giá trị đặt hàng trong ngày</p>--}}
+{{--            </div>--}}
+{{--            <div class="icon">--}}
+{{--                <i class="fas fa-file-invoice-dollar"></i>--}}
+{{--            </div>--}}
+{{--        </div>--}}
     </div>
+    <!-- ./col -->
+{{--    <div class="col-lg-3 col-6">--}}
+{{--        <!-- small box -->--}}
+{{--        <div class="small-box bg-warning">--}}
+{{--            <div class="inner">--}}
+{{--                <h3 style="color: #F58220">{{ $data_analytics['active'] }}</h3>--}}
+{{--                <h3 style="color: #F58220">0</h3>--}}
+{{--                <p>Khách đang online</p>--}}
+{{--            </div>--}}
+{{--            <div class="icon">--}}
+{{--                <i class="fas fa-user"></i>--}}
+{{--            </div>--}}
+{{--        </div>--}}
+{{--    </div>--}}
+    <!-- ./col -->
+{{--    <div class="col-lg-3 col-6">--}}
+{{--        <!-- small box -->--}}
+{{--        <div class="small-box bg-danger">--}}
+{{--            <div class="inner">--}}
+{{--                <h3 style="color: #F58220">{{ isset($data_analytics['today']) ? $data_analytics['today'][0]['visitors'] : 0 }}</h3>--}}
+{{--                <p> Khách trong ngày </p>--}}
+{{--            </div>--}}
+{{--            <div class="icon">--}}
+{{--                <i class="fas fa-users"></i>--}}
+{{--            </div>--}}
+{{--        </div>--}}
+{{--    </div>--}}
     <!-- ./col -->
 </div>
 <!-- /.row -->
@@ -75,89 +90,89 @@ Admin Panel - {{ $config->web_title }}
     <section class="col-lg-4 connectedSortable">
         <!-- TO DO List -->
         <div class="card">
-            <div class="card-header">
-                <h3 class="card-title">
-                    <i class="ion ion-clipboard mr-1"></i>
-                    Thiết bị truy cập 30 ngày qua
-                </h3>
-            </div>
+{{--            <div class="card-header">--}}
+{{--                <h3 class="card-title">--}}
+{{--                    <i class="ion ion-clipboard mr-1"></i>--}}
+{{--                    Thiết bị truy cập 30 ngày qua--}}
+{{--                </h3>--}}
+{{--            </div>--}}
             <!-- /.card-header -->
-            <div class="card-body">
-                <div id="devices-chart"></div>
-                <table style="padding: 7px; text-align: center;width: 100%">
-                    <tr>
-                        <td>Máy tính để bàn</td>
-                        <td>Di động</td>
-                        <td>Máy tính bảng</td>
-                    </tr>
-                    @if(!$data_analytics['devices']->isEmpty())
-                    <tr>
-                        <td style="font-weight: bold;">
+{{--            <div class="card-body">--}}
+{{--                <div id="devices-chart"></div>--}}
+{{--                <table style="padding: 7px; text-align: center;width: 100%">--}}
+{{--                    <tr>--}}
+{{--                        <td>Máy tính để bàn</td>--}}
+{{--                        <td>Di động</td>--}}
+{{--                        <td>Máy tính bảng</td>--}}
+{{--                    </tr>--}}
+{{--                    @if(!$data_analytics['devices']->isEmpty())--}}
+{{--                    <tr>--}}
+{{--                        <td style="font-weight: bold;">--}}
 
-                            @if(isset($data_analytics['devices'][0]))
-                            {{ round(($data_analytics['devices'][0]['count']/$data_analytics['devices']->sum('count'))*100, 2) }} %
-                            @else
-                            0 %
-                            @endif
-                        </td>
-                        <td style="font-weight: bold;">
-                            @if(isset($data_analytics['devices'][1]))
-                            {{ round(($data_analytics['devices'][1]['count']/$data_analytics['devices']->sum('count'))*100, 2) }} %
-                            @else
-                            0 %
-                            @endif
-                        </td>
-                        <td style="font-weight: bold;">
-                            @if(isset($data_analytics['devices'][2]))
-                            {{ round(($data_analytics['devices'][2]['count']/$data_analytics['devices']->sum('count'))*100, 2) }} %
-                            @else
-                            0 %
-                            @endif
-                        </td>
+{{--                            @if(isset($data_analytics['devices'][0]))--}}
+{{--                            {{ round(($data_analytics['devices'][0]['count']/$data_analytics['devices']->sum('count'))*100, 2) }} %--}}
+{{--                            @else--}}
+{{--                            0 %--}}
+{{--                            @endif--}}
+{{--                        </td>--}}
+{{--                        <td style="font-weight: bold;">--}}
+{{--                            @if(isset($data_analytics['devices'][1]))--}}
+{{--                            {{ round(($data_analytics['devices'][1]['count']/$data_analytics['devices']->sum('count'))*100, 2) }} %--}}
+{{--                            @else--}}
+{{--                            0 %--}}
+{{--                            @endif--}}
+{{--                        </td>--}}
+{{--                        <td style="font-weight: bold;">--}}
+{{--                            @if(isset($data_analytics['devices'][2]))--}}
+{{--                            {{ round(($data_analytics['devices'][2]['count']/$data_analytics['devices']->sum('count'))*100, 2) }} %--}}
+{{--                            @else--}}
+{{--                            0 %--}}
+{{--                            @endif--}}
+{{--                        </td>--}}
 
-                    </tr>
-                    @endif
-                </table>
-            </div>
+{{--                    </tr>--}}
+{{--                    @endif--}}
+{{--                </table>--}}
+{{--            </div>--}}
             <!-- /.card-body -->
         </div>
         <!-- /.card -->
     </section>
 
-    <section class="col-lg-8 connectedSortable">
-        <!-- TO DO List -->
-        <div class="card">
-            <div class="card-header">
-                <h3 class="card-title">
-                    <i class="ion ion-clipboard mr-1"></i>
-                    Thiết bị truy cập 30 ngày qua
-                </h3>
-            </div>
-            <!-- /.card-header -->
-            <div class="card-body">
-                <table class="table table-condensed table-hover">
-                    <thead>
-                        <tr>
-                            <th>URL</th>
-                            <th>Tên trang</th>
-                            <th>Số lần xem</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($data_analytics['top_visited_pages'] as $item)
-                        <tr>
-                            <td>{{ $item['url'] }}</td>
-                            <td>{{ $item['pageTitle'] }}</td>
-                            <td>{{ $item['pageViews'] }}</td>
-                        </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
-            <!-- /.card-body -->
-        </div>
-        <!-- /.card -->
-    </section>
+{{--    <section class="col-lg-8 connectedSortable">--}}
+{{--        <!-- TO DO List -->--}}
+{{--        <div class="card">--}}
+{{--            <div class="card-header">--}}
+{{--                <h3 class="card-title">--}}
+{{--                    <i class="ion ion-clipboard mr-1"></i>--}}
+{{--                    Thiết bị truy cập 30 ngày qua--}}
+{{--                </h3>--}}
+{{--            </div>--}}
+{{--            <!-- /.card-header -->--}}
+{{--            <div class="card-body">--}}
+{{--                <table class="table table-condensed table-hover">--}}
+{{--                    <thead>--}}
+{{--                        <tr>--}}
+{{--                            <th>URL</th>--}}
+{{--                            <th>Tên trang</th>--}}
+{{--                            <th>Số lần xem</th>--}}
+{{--                        </tr>--}}
+{{--                    </thead>--}}
+{{--                    <tbody>--}}
+{{--                        @foreach ($data_analytics['top_visited_pages'] as $item)--}}
+{{--                        <tr>--}}
+{{--                            <td>{{ $item['url'] }}</td>--}}
+{{--                            <td>{{ $item['pageTitle'] }}</td>--}}
+{{--                            <td>{{ $item['pageViews'] }}</td>--}}
+{{--                        </tr>--}}
+{{--                        @endforeach--}}
+{{--                    </tbody>--}}
+{{--                </table>--}}
+{{--            </div>--}}
+{{--            <!-- /.card-body -->--}}
+{{--        </div>--}}
+{{--        <!-- /.card -->--}}
+{{--    </section>--}}
 
 
 </div>
@@ -191,7 +206,7 @@ var today = new Date();
         weeks[i] = today;
     }
     weeks = weeks.reverse();
-    let sales = @json($sales);
+    {{--let sales = @json($sales);--}}
 
     let sale_data = weeks.map(w => {
         let exist = sales.find(val => dateGetter(val.day) == w);
@@ -200,86 +215,86 @@ var today = new Date();
     })
 
 
-    var areaChartData = {
-      labels  : weeks,
-      datasets: [
-        {
-          label               : 'Doanh số ngày',
-          backgroundColor     : 'rgb(38, 115, 215,0.9)',
-          borderColor         : 'rgb(38, 115, 215,0.8)',
-          pointRadius          : false,
-          pointColor          : '#3b8bba',
-          pointStrokeColor    : 'rgb(38, 115, 215,0.8)',
-          pointHighlightFill  : '#fff',
-          pointHighlightStroke: 'rgb(38, 115, 215,0.8)',
-          data                : sale_data
-        },
+  {{--  var areaChartData = {--}}
+  {{--    labels  : weeks,--}}
+  {{--    datasets: [--}}
+  {{--      {--}}
+  {{--        label               : 'Doanh số ngày',--}}
+  {{--        backgroundColor     : 'rgb(38, 115, 215,0.9)',--}}
+  {{--        borderColor         : 'rgb(38, 115, 215,0.8)',--}}
+  {{--        pointRadius          : false,--}}
+  {{--        pointColor          : '#3b8bba',--}}
+  {{--        pointStrokeColor    : 'rgb(38, 115, 215,0.8)',--}}
+  {{--        pointHighlightFill  : '#fff',--}}
+  {{--        pointHighlightStroke: 'rgb(38, 115, 215,0.8)',--}}
+  {{--        data                : sale_data--}}
+  {{--      },--}}
 
-      ]
-    }
-    //- BAR CHART -
-    //-------------
-    var barChartCanvas = $('#barChart').get(0).getContext('2d')
-    var barChartData = jQuery.extend(true, {}, areaChartData)
-    var temp0 = areaChartData.datasets[0]
-    barChartData.datasets[0] = temp0
-    var barChartOptions = {
-      responsive              : true,
-      maintainAspectRatio     : false,
-      datasetFill             : false
-    }
-    var barChart = new Chart(barChartCanvas, {
-      type: 'bar',
-      data: barChartData,
-      options: barChartOptions
-    })
+  {{--    ]--}}
+  {{--  }--}}
+  {{--  //- BAR CHART ---}}
+  {{--  //---------------}}
+  {{--  var barChartCanvas = $('#barChart').get(0).getContext('2d')--}}
+  {{--  var barChartData = jQuery.extend(true, {}, areaChartData)--}}
+  {{--  var temp0 = areaChartData.datasets[0]--}}
+  {{--  barChartData.datasets[0] = temp0--}}
+  {{--  var barChartOptions = {--}}
+  {{--    responsive              : true,--}}
+  {{--    maintainAspectRatio     : false,--}}
+  {{--    datasetFill             : false--}}
+  {{--  }--}}
+  {{--  var barChart = new Chart(barChartCanvas, {--}}
+  {{--    type: 'bar',--}}
+  {{--    data: barChartData,--}}
+  {{--    options: barChartOptions--}}
+  {{--  })--}}
 
-    Morris.Donut({
-    element: 'devices-chart',
-    data: [
-    @foreach ($data_analytics['devices'] as $item)
-    { label: "{{ $item['device'] }}", value: {{ $item['count'] }} },
-    @endforeach
-    ]
-  });
+  {{--  Morris.Donut({--}}
+  {{--  element: 'devices-chart',--}}
+  {{--  data: [--}}
+  {{--  @foreach ($data_analytics['devices'] as $item)--}}
+  {{--  { label: "{{ $item['device'] }}", value: {{ $item['count'] }} },--}}
+  {{--  @endforeach--}}
+  {{--  ]--}}
+  {{--});--}}
 
-  Morris.Bar({
-    element: 'organic-chart',
-    behaveLikeLine: true,
-    data: [
-    @foreach ($data_analytics['organic_search'] as $key => $item)
-    { source: '{{ $item['source'] }}', total: {{ $item['count'] }} },
-    @if($key > 4)
-    @break
-    @endif
-    @endforeach
-    ],
-    xkey: 'source',
-    ykeys: ['total'],
-    labels: 'Số lượt',
-    barRatio: 0.4,
-    xLabelAngle: 35,
-    barColors:['#1abc9c'],
-    hideHover: 'auto'
-  });
+  {{--Morris.Bar({--}}
+  {{--  element: 'organic-chart',--}}
+  {{--  behaveLikeLine: true,--}}
+  {{--  data: [--}}
+  {{--  @foreach ($data_analytics['organic_search'] as $key => $item)--}}
+  {{--  { source: '{{ $item['source'] }}', total: {{ $item['count'] }} },--}}
+  {{--  @if($key > 4)--}}
+  {{--  @break--}}
+  {{--  @endif--}}
+  {{--  @endforeach--}}
+  {{--  ],--}}
+  {{--  xkey: 'source',--}}
+  {{--  ykeys: ['total'],--}}
+  {{--  labels: 'Số lượt',--}}
+  {{--  barRatio: 0.4,--}}
+  {{--  xLabelAngle: 35,--}}
+  {{--  barColors:['#1abc9c'],--}}
+  {{--  hideHover: 'auto'--}}
+  {{--});--}}
 
-  Morris.Area({
-    element: 'area-chart',
-    behaveLikeLine: true,
-    data: [
-    @foreach ($data_analytics['total_page_views'] as $key=>$item)
-    { day: '{{  \Carbon\Carbon::parse($item['date'])->format('d/m') }}', visitors: {{ $item['visitors'] }}, pageViews: {{ $item['pageViews'] }} },
-    @endforeach
-    ],
-    xkey: 'day',
-    ykeys: ['visitors', 'pageViews'],
-    labels: ['Lượt truy cập', 'Lượt xem trang'],
-    parseTime: false,
-    pointFillColors:['rgb(126, 129, 203)'],
-    pointStrokeColors: ['rgb(126, 129, 203)'],
-    lineColors:['#2ecc71','#1abc9c'],
-    fillOpacity: 0.4
-  });
+  {{--Morris.Area({--}}
+  {{--  element: 'area-chart',--}}
+  {{--  behaveLikeLine: true,--}}
+  {{--  data: [--}}
+  {{--  @foreach ($data_analytics['total_page_views'] as $key=>$item)--}}
+  {{--  { day: '{{  \Carbon\Carbon::parse($item['date'])->format('d/m') }}', visitors: {{ $item['visitors'] }}, pageViews: {{ $item['pageViews'] }} },--}}
+  {{--  @endforeach--}}
+  {{--  ],--}}
+  {{--  xkey: 'day',--}}
+  {{--  ykeys: ['visitors', 'pageViews'],--}}
+  {{--  labels: ['Lượt truy cập', 'Lượt xem trang'],--}}
+  {{--  parseTime: false,--}}
+  {{--  pointFillColors:['rgb(126, 129, 203)'],--}}
+  {{--  pointStrokeColors: ['rgb(126, 129, 203)'],--}}
+  {{--  lineColors:['#2ecc71','#1abc9c'],--}}
+  {{--  fillOpacity: 0.4--}}
+  {{--});--}}
 </script>
 
 
